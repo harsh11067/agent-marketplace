@@ -1,0 +1,101 @@
+[
+  {
+    "id": "task-1773746728800",
+    "title": "build a landing page for a product launch",
+    "description": "build a landing page for a product launch",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773746728800-agent-design",
+    "escrowId": "escrow-task-1773746728800",
+    "result": {
+      "summary": "Design Agent completed build a landing page for a product launch",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-a-product-launch-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773746977828",
+    "title": "build landing page",
+    "description": "build landing page",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773746977828-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773746977828",
+    "result": {
+      "summary": "Design Agent completed build landing page",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-landing-page-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773747840163",
+    "title": "Launch page",
+    "description": "build a landing page for a launch",
+    "reward": 77,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773747840163-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773747840163",
+    "result": {
+      "summary": "Design Agent completed Launch page",
+      "artifactPath": "/home/hash/my-aproject/artifacts/launch-page-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773748091661",
+    "title": "Escrow fallback test",
+    "description": "build a landing page for escrow fallback",
+    "reward": 80,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "verified",
+    "selectedBidId": "bid-task-1773748091661-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773748091661",
+    "result": {
+      "summary": "Design Agent completed Escrow fallback test",
+      "artifactPath": "/home/hash/my-aproject/artifacts/escrow-fallback-test-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773748134957",
+    "title": "Escrow fallback test 2",
+    "description": "build a landing page for escrow fallback two",
+    "reward": 81,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773748134957-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773748134957",
+    "result": {
+      "summary": "Design Agent completed Escrow fallback test 2",
+      "artifactPath": "/home/hash/my-aproject/artifacts/escrow-fallback-test-2-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  }
+]

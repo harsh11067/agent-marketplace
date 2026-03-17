@@ -1,0 +1,19 @@
+{
+  "name": "my-aproject",
+  "version": "1.0.0",
+  "description": "Minimal autonomous AI agent marketplace framework for the Synthesis hackathon",
+  "main": "src/api/server.ts",
+  "scripts": {
+    "dev": "node --experimental-strip-types src/api/server.ts serve",
+    "demo": "node --experimental-strip-types src/api/server.ts demo",
+    "submit": "node --experimental-strip-types src/api/server.ts submit \"build a landing page\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "ethers": "^6.16.0",
+    "express": "^5.2.1"
+  }
+}
