@@ -30,26 +30,33 @@ Minimal Node.js + TypeScript framework for a decentralized-style AI agent market
 
 Requires Node.js 24+.
 
-```bash
-npm run demo
-```
-
-Submit a custom CLI task:
+First, install dependencies for both the backend engine and the React user interface:
 
 ```bash
-node --experimental-strip-types src/api/server.ts submit "build a landing page for a wallet app"
+# This installs packages across the entire workspace
+npm run install:all
 ```
 
-Start the API server:
+Start the unified server (this spins up both backend API on :3002 and Next.js frontend on :3001 concurrently):
 
 ```bash
 npm run dev
 ```
 
-Then submit a task:
+Then open your browser to **http://localhost:3001/**
+
+### Testing with CLI (Optional)
+
+You can still submit a custom task directly to the backend bypassing the UI:
 
 ```bash
-curl -X POST http://localhost:3000/tasks \
+node --experimental-strip-types src/api/server.ts submit "build a landing page for a wallet app"
+```
+
+Or via cURL to the API:
+
+```bash
+curl -X POST http://localhost:3002/tasks \
   -H "content-type: application/json" \
   -d '{"description":"build a landing page"}'
 ```

@@ -1,0 +1,33 @@
+import Spline from '@splinetool/react-spline';
+
+export default function Hero() {
+  return (
+    <div className="h-screen">
+      <Spline scene="https://prod.spline.design/xyz/scene.splinecode" />
+    </div>
+  );
+}
+
+import Spline from '@splinetool/react-spline';
+
+export default function Hero() {
+  return (
+    <div className="relative h-screen w-full">
+      
+      {/* 3D Background */}
+      <Spline
+        scene="https://prod.spline.design/xyz/scene.splinecode"
+        className="absolute top-0 left-0 w-full h-full"
+      />
+
+      {/* Overlay UI */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-white">
+        <h1 className="text-5xl font-bold">Your Product</h1>
+        <button className="mt-6 px-6 py-3 bg-blue-500 rounded-xl">
+          Get Started
+        </button>
+      </div>
+      
+    </div>
+  );
+}

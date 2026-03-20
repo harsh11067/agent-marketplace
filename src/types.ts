@@ -1,19 +1,35 @@
 export type TaskStatus =
+  | "queued"
   | "open"
+  | "bidding"
   | "assigned"
   | "in_progress"
-  | "submitted"
-  | "verified"
-  | "paid";
+  | "completed"
+  | "failed"
+  | "cancelled";
 
 export interface Task {
   id: string;
+  createdAt?: number;
   title: string;
   description: string;
   reward: number;
   requirements: string[];
   createdBy: string;
   status: TaskStatus;
+  failureReason?: string;
+
+  // Delegation flow (User → Orchestrator → Specialist)
+  delegator?: string;
+  delegate?: string;
+  deadline?: number;
+  delegation?: unknown;
+  subDelegation?: unknown;
+
+  // On-chain linkage / tx tracking
+  chainJobId?: number;
+  txHashes?: Record<string, string>;
+
   selectedBidId?: string;
   selectedAgentId?: string;
   escrowId?: string;

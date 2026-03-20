@@ -1,0 +1,4 @@
+node_modules
+.ssh/
+id_ed25519
+*.pem

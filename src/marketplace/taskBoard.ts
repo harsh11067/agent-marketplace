@@ -12,6 +12,7 @@ export class TaskBoard extends EventEmitter {
   }
 
   postTask(task: Task): Task {
+    task.status = "open";
     this.tasks.set(task.id, task);
     console.log(`[task:create] ${task.id} "${task.title}" reward=${task.reward}`);
     this.emit("taskPosted", task);
@@ -28,8 +29,14 @@ export class TaskBoard extends EventEmitter {
 
   submitBid(bid: Bid): void {
     const bids = this.bidsByTask.get(bid.taskId) ?? [];
+    const task = this.tasks.get(bid.taskId);
+    if (!task) return;
+
     bids.push(bid);
     this.bidsByTask.set(bid.taskId, bids);
+    if (task.status === "open" || task.status === "queued") {
+      task.status = "bidding";
+    }
     console.log(
       `[bid:submit] ${bid.id} task=${bid.taskId} agent=${bid.agentId} price=${bid.price} score=${bid.capabilityScore}`
     );
@@ -60,7 +67,7 @@ export class TaskBoard extends EventEmitter {
 
     task.escrowId = escrowId;
     task.txHash = txHash;
-    console.log(`[payment:escrow] task=${taskId} escrow=${escrowId} tx=${txHash ?? "mock"}`);
+    console.log(`[payment:escrow] task=${taskId} escrow=${escrowId} tx=${txHash ?? "n/a"}`);
     this.emit("escrowCreated", task);
   }
 
@@ -78,26 +85,37 @@ export class TaskBoard extends EventEmitter {
     if (!task) return;
 
     task.result = result;
-    task.status = "submitted";
+    task.status = "completed";
     console.log(`[task:result] ${taskId} artifact=${result.artifactPath}`);
     this.emit("resultSubmitted", task, result);
   }
 
-  verifyTask(taskId: string): void {
+  markCompleted(taskId: string): void {
     const task = this.tasks.get(taskId);
     if (!task) return;
 
-    task.status = "verified";
-    console.log(`[task:verify] ${taskId} status=verified`);
-    this.emit("taskVerified", task);
+    task.status = "completed";
+    console.log(`[task:complete] ${taskId} status=completed`);
+    this.emit("taskCompleted", task);
   }
 
-  markPaid(taskId: string): void {
+  markFailed(taskId: string, reason: string): void {
     const task = this.tasks.get(taskId);
     if (!task) return;
 
-    task.status = "paid";
-    console.log(`[payment:release] ${taskId} status=paid`);
-    this.emit("paymentReleased", task);
+    task.status = "failed";
+    task.failureReason = reason;
+    console.log(`[task:failed] ${taskId} reason=${reason}`);
+    this.emit("taskFailed", task, reason);
+  }
+
+  cancelTask(taskId: string, reason = "cancelled"): void {
+    const task = this.tasks.get(taskId);
+    if (!task) return;
+
+    task.status = "cancelled";
+    task.failureReason = reason;
+    console.log(`[task:cancel] ${taskId} reason=${reason}`);
+    this.emit("taskCancelled", task, reason);
   }
 }

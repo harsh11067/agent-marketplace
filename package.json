@@ -4,16 +4,27 @@
   "description": "Minimal autonomous AI agent marketplace framework for the Synthesis hackathon",
   "main": "src/api/server.ts",
   "scripts": {
-    "dev": "node --experimental-strip-types src/api/server.ts serve",
-    "demo": "node --experimental-strip-types src/api/server.ts demo",
-    "submit": "node --experimental-strip-types src/api/server.ts submit \"build a landing page\""
+    "dev": "npx concurrently --kill-others \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "backend:dev": "node --env-file=.env --experimental-strip-types src/api/server.ts serve",
+    "demo": "node --env-file=.env --experimental-strip-types src/api/server.ts demo",
+    "submit": "node --env-file=.env --experimental-strip-types src/api/server.ts submit \"build a landing page\"",
+    "orchestrator:run": "node --env-file=.env --experimental-strip-types src/agent/runOrchestrator.ts",
+    "orchestrator:test": "node --test --experimental-strip-types src/agent/orchestratorAgent.test.ts",
+    "backend:test": "node --test --experimental-strip-types src/api/server.integration.test.ts src/blockchain/paymentManager.test.ts",
+    "start": "npx concurrently --kill-others \"npm run backend:dev\" \"npm run frontend:dev\"",
+    "frontend:dev": "cd frontend && npm run dev",
+    "frontend:install": "cd frontend && npm install",
+    "hardhat:install": "cd my-aproject && npm install",
+    "install:all": "npm install && npm run frontend:install && npm run hardhat:install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@splinetool/react-spline": "^2.2.6",
     "ethers": "^6.16.0",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "hardhat": "^3.1.12"
   }
 }

@@ -97,5 +97,669 @@
       "artifactPath": "/home/hash/my-aproject/artifacts/escrow-fallback-test-2-artifact.html",
       "verificationNotes": "Generated artifact using 3 research signals."
     }
+  },
+  {
+    "id": "task-1773896762358",
+    "title": "make a protfolio",
+    "description": "make a protfolio",
+    "reward": 90,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773896762358-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1773896762358",
+    "result": {
+      "summary": "Builder Agent completed make a protfolio",
+      "artifactPath": "/home/hash/my-aproject/artifacts/make-a-protfolio-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773898651133",
+    "title": "build a landing page for a wallet app",
+    "description": "build a landing page for a wallet app",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773898651133-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773898651133",
+    "result": {
+      "summary": "Design Agent completed build a landing page for a wallet app",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-a-wallet-app-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773898651184",
+    "title": "draft a short product launch announcement and...",
+    "description": "draft a short product launch announcement and hero copy",
+    "reward": 90,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773898651184-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1773898651184",
+    "result": {
+      "summary": "Builder Agent completed draft a short product launch announcement and...",
+      "artifactPath": "/home/hash/my-aproject/artifacts/draft-a-short-product-launch-announcement-and--artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773898651236",
+    "title": "create a minimal portfolio HTML page",
+    "description": "create a minimal portfolio HTML page",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773898651236-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773898651236",
+    "result": {
+      "summary": "Design Agent completed create a minimal portfolio HTML page",
+      "artifactPath": "/home/hash/my-aproject/artifacts/create-a-minimal-portfolio-html-page-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773898656757",
+    "title": "build a landing page hello world task",
+    "description": "build a landing page hello world task",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773898656757-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773898656757",
+    "result": {
+      "summary": "Design Agent completed build a landing page hello world task",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-hello-world-task-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773899888705",
+    "title": "build a landing page for a wallet app",
+    "description": "build a landing page for a wallet app",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773899888705-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773899888705",
+    "result": {
+      "summary": "Design Agent completed build a landing page for a wallet app",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-a-wallet-app-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773899888756",
+    "title": "draft a short product launch announcement and...",
+    "description": "draft a short product launch announcement and hero copy",
+    "reward": 90,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773899888756-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1773899888756",
+    "result": {
+      "summary": "Builder Agent completed draft a short product launch announcement and...",
+      "artifactPath": "/home/hash/my-aproject/artifacts/draft-a-short-product-launch-announcement-and--artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773899888808",
+    "title": "create a minimal portfolio HTML page",
+    "description": "create a minimal portfolio HTML page",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773899888808-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773899888808",
+    "result": {
+      "summary": "Design Agent completed create a minimal portfolio HTML page",
+      "artifactPath": "/home/hash/my-aproject/artifacts/create-a-minimal-portfolio-html-page-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773900850933",
+    "title": "build a landing page",
+    "description": "build a landing page",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773900850933-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773900850933",
+    "result": {
+      "summary": "Design Agent completed build a landing page",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773902331648",
+    "title": "build a landing page for a wallet app",
+    "description": "build a landing page for a wallet app",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773902331648-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773902331648",
+    "result": {
+      "summary": "Design Agent completed build a landing page for a wallet app",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-a-wallet-app-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773902331701",
+    "title": "draft a short product launch announcement and...",
+    "description": "draft a short product launch announcement and hero copy",
+    "reward": 90,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773902331701-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1773902331701",
+    "result": {
+      "summary": "Builder Agent completed draft a short product launch announcement and...",
+      "artifactPath": "/home/hash/my-aproject/artifacts/draft-a-short-product-launch-announcement-and--artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773902331752",
+    "title": "create a minimal portfolio HTML page",
+    "description": "create a minimal portfolio HTML page",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773902331752-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773902331752",
+    "result": {
+      "summary": "Design Agent completed create a minimal portfolio HTML page",
+      "artifactPath": "/home/hash/my-aproject/artifacts/create-a-minimal-portfolio-html-page-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773902573059",
+    "title": "build a landing page for a wallet app",
+    "description": "build a landing page for a wallet app",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773902573059-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773902573059",
+    "result": {
+      "summary": "Design Agent completed build a landing page for a wallet app",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-a-wallet-app-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773902573110",
+    "title": "draft a short product launch announcement and...",
+    "description": "draft a short product launch announcement and hero copy",
+    "reward": 90,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773902573110-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1773902573110",
+    "result": {
+      "summary": "Builder Agent completed draft a short product launch announcement and...",
+      "artifactPath": "/home/hash/my-aproject/artifacts/draft-a-short-product-launch-announcement-and--artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773902573161",
+    "title": "create a minimal portfolio HTML page",
+    "description": "create a minimal portfolio HTML page",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773902573161-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773902573161",
+    "result": {
+      "summary": "Design Agent completed create a minimal portfolio HTML page",
+      "artifactPath": "/home/hash/my-aproject/artifacts/create-a-minimal-portfolio-html-page-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773902632502",
+    "title": "build a landing page for a wallet app",
+    "description": "build a landing page for a wallet app",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773902632502-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773902632502",
+    "result": {
+      "summary": "Design Agent completed build a landing page for a wallet app",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-a-wallet-app-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773902632553",
+    "title": "draft a short product launch announcement and...",
+    "description": "draft a short product launch announcement and hero copy",
+    "reward": 90,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773902632553-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1773902632553",
+    "result": {
+      "summary": "Builder Agent completed draft a short product launch announcement and...",
+      "artifactPath": "/home/hash/my-aproject/artifacts/draft-a-short-product-launch-announcement-and--artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773902632604",
+    "title": "create a minimal portfolio HTML page",
+    "description": "create a minimal portfolio HTML page",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773902632604-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773902632604",
+    "result": {
+      "summary": "Design Agent completed create a minimal portfolio HTML page",
+      "artifactPath": "/home/hash/my-aproject/artifacts/create-a-minimal-portfolio-html-page-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773924878138",
+    "title": "build a landing page for a wallet app",
+    "description": "build a landing page for a wallet app",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773924878138-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773924878138",
+    "result": {
+      "summary": "Design Agent completed build a landing page for a wallet app",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-a-wallet-app-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1773924878201",
+    "title": "draft a short product launch announcement and...",
+    "description": "draft a short product launch announcement and hero copy",
+    "reward": 90,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773924878201-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1773924878201",
+    "result": {
+      "summary": "Builder Agent completed draft a short product launch announcement and...",
+      "artifactPath": "/home/hash/my-aproject/artifacts/draft-a-short-product-launch-announcement-and--artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773924878258",
+    "title": "create a minimal portfolio HTML page",
+    "description": "create a minimal portfolio HTML page",
+    "reward": 90,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "selectedBidId": "bid-task-1773924878258-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1773924878258",
+    "result": {
+      "summary": "Design Agent completed create a minimal portfolio HTML page",
+      "artifactPath": "/home/hash/my-aproject/artifacts/create-a-minimal-portfolio-html-page-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773984793733",
+    "title": "build this hit",
+    "description": "build this hit",
+    "reward": 0.005,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "delegator": "0xc2b7c2b9c923941a14b3e1f42897b1769eea28c3",
+    "delegate": "0x890437459ECc4C844f28DeE85361734F2f054407",
+    "deadline": 1773985392,
+    "selectedBidId": "bid-task-1773984793733-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1773984793733",
+    "result": {
+      "summary": "Builder Agent completed build this hit",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-this-hit-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1773986798072",
+    "title": "this one",
+    "description": "this one",
+    "reward": 0.0005,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "delegator": "0xc2b7c2b9c923941a14b3e1f42897b1769eea28c3",
+    "delegate": "0x890437459ECc4C844f28DeE85361734F2f054407",
+    "deadline": 1773987078,
+    "selectedBidId": "bid-task-1773986798072-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1773986798072",
+    "result": {
+      "summary": "Builder Agent completed this one",
+      "artifactPath": "/home/hash/my-aproject/artifacts/this-one-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1774008271622",
+    "title": "here we go again",
+    "description": "here we go again",
+    "reward": 0.00005,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "paid",
+    "delegator": "0xc2b7c2b9c923941a14b3e1f42897b1769eea28c3",
+    "delegate": "0x890437459ECc4C844f28DeE85361734F2f054407",
+    "deadline": 1774008863,
+    "selectedBidId": "bid-task-1774008271622-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1774008271622",
+    "result": {
+      "summary": "Builder Agent completed here we go again",
+      "artifactPath": "/home/hash/my-aproject/artifacts/here-we-go-again-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    }
+  },
+  {
+    "id": "task-1774008429155",
+    "title": "tisit",
+    "description": "tisit",
+    "reward": 0.0005,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "in_progress",
+    "delegator": "0xc2b7c2b9c923941a14b3e1f42897b1769eea28c3",
+    "delegate": "0x890437459ECc4C844f28DeE85361734F2f054407",
+    "deadline": 1774009020,
+    "txHashes": {
+      "paymentTx": "0x58ee1364a86f8af6f9c2e53ffe9bda121b01ffaa21c83298f4b8c369a39cb905"
+    },
+    "selectedBidId": "bid-task-1774008429155-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "escrow-task-1774008429155"
+  },
+  {
+    "id": "task-1774009713619",
+    "createdAt": 1774009713619,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774009713619-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774009713619",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1774009713623",
+    "createdAt": 1774009713623,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774009713623-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774009713623",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1774009721693",
+    "createdAt": 1774009721693,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "open"
+  },
+  {
+    "id": "task-1774009738402",
+    "createdAt": 1774009738402,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774009738402-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774009738402",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1774009738406",
+    "createdAt": 1774009738406,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774009738406-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774009738406",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1774009746479",
+    "createdAt": 1774009746479,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "open"
+  },
+  {
+    "id": "task-1774009803101",
+    "createdAt": 1774009803101,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774009803101-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774009803101",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1774009803105",
+    "createdAt": 1774009803105,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774009803105-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774009803105",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1774009811177",
+    "createdAt": 1774009811177,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
   }
 ]
