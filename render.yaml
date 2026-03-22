@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: agent-marketplace-api
+    runtime: node
+    rootDir: .
+    buildCommand: npm install
+    startCommand: npm run backend:start
+    healthCheckPath: /health
+    disk:
+      name: agent-marketplace-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "24"
+      - key: AGENTFLOW_RUNTIME_DIR
+        value: /var/data/agentflow
+      - key: PUBLIC_FRONTEND_URL
+        sync: false
+      - key: PUBLIC_API_URL
+        sync: false
+      - key: BASE_SEPOLIA_RPC
+        sync: false
+      - key: AGENTFLOW_MARKETPLACE_ADDRESS
+        sync: false
+      - key: AGENTFLOW_REPUTATION_ADDRESS
+        sync: false
+      - key: AGENTFLOW_DELEGATION_BUDGET_ADDRESS
+        sync: false
+      - key: AGENTFLOW_USDC_ADDRESS
+        sync: false
+      - key: DEPLOYER_KEY
+        sync: false
+      - key: AGENT_OWNER_KEY
+        sync: false
+      - key: AGENT_BUILDER_KEY
+        sync: false
+      - key: AGENT_DESIGN_KEY
+        sync: false
+      - key: PINATA_JWT
+        sync: false
+      - key: UNISWAP_API_KEY
+        sync: false

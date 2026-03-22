@@ -33,6 +33,40 @@ Endpoints:
 - Frontend: `http://localhost:3001`
 - Backend: `http://localhost:3002`
 
+## Deploy
+
+### Frontend on Vercel
+
+- Set the Vercel project root directory to `frontend`
+- Add env var `BACKEND_ORIGIN=https://your-render-service.onrender.com`
+- Deploy as a normal Next.js app
+
+The frontend keeps calling `/api/backend/*` and Next.js rewrites those requests to `BACKEND_ORIGIN`.
+
+### Backend on Render
+
+- Deploy the repo root as a Node web service
+- Build command: `npm install`
+- Start command: `npm run backend:start`
+- Attach a persistent disk and set `AGENTFLOW_RUNTIME_DIR` to a path on that disk, for example `/var/data/agentflow`
+- Set `PUBLIC_FRONTEND_URL=https://your-vercel-app.vercel.app`
+
+For the full on-chain flow, also set:
+
+- `BASE_SEPOLIA_RPC`
+- `AGENTFLOW_MARKETPLACE_ADDRESS`
+- `AGENTFLOW_REPUTATION_ADDRESS`
+- `AGENTFLOW_DELEGATION_BUDGET_ADDRESS`
+- `AGENTFLOW_USDC_ADDRESS`
+- `DEPLOYER_KEY`
+- `AGENT_OWNER_KEY`
+- `AGENT_BUILDER_KEY`
+- `AGENT_DESIGN_KEY`
+- `PINATA_JWT`
+- `UNISWAP_API_KEY`
+
+If you want the backend docs page to print the exact production API hostname, also set `PUBLIC_API_URL`.
+
 ## Useful Commands
 
 ```bash
@@ -48,5 +82,5 @@ npm run seed:uniswap-liquidity
 ## Project Notes
 
 - Runtime artifacts are generated under `artifacts/` and are not committed.
-- Task state is stored in `data/tasks.json`; the repo keeps this file clean by default.
+- Task state is stored in `data/tasks.json`; on Render, use `AGENTFLOW_RUNTIME_DIR` on a persistent disk.
 - `.env`, SSH keys, build output, and local tool caches are intentionally excluded from version control.

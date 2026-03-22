@@ -498,7 +498,7 @@ export default function DashboardPage() {
       setAgents(Array.isArray(a) ? a : [])
       setBackendError('')
     } catch {
-      setBackendError('Backend unavailable on port 3002.')
+      setBackendError('Backend unavailable.')
     }
   }, [])
 

@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npx concurrently --kill-others \"npm run backend:dev\" \"npm run frontend:dev\"",
     "backend:dev": "node --env-file=.env --experimental-strip-types src/api/server.ts serve",
+    "backend:start": "node --env-file=.env --experimental-strip-types src/api/server.ts serve",
     "demo": "node --env-file=.env --experimental-strip-types src/api/server.ts demo",
     "submit": "node --env-file=.env --experimental-strip-types src/api/server.ts submit \"build a landing page\"",
     "orchestrator:run": "node --env-file=.env --experimental-strip-types src/agent/runOrchestrator.ts",

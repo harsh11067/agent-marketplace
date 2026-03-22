@@ -35,10 +35,38 @@ import { loadChainIdFromEnv, resolveManagedWallet } from "../shared/wallet.ts";
 import type { DelegationRecord, SubDelegationRecord } from "../types.ts";
 import { createDelegationDigest, createDelegationNonce } from "../shared/delegation.ts";
 
-const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
-const dataDir = resolve(workspaceRoot, "data");
+const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
+const runtimeRoot = resolve(process.env.AGENTFLOW_RUNTIME_DIR ?? projectRoot);
+const dataDir = resolve(runtimeRoot, "data");
 const tasksFile = resolve(dataDir, "tasks.json");
-const artifactsDir = resolve(workspaceRoot, "artifacts");
+const artifactsDir = resolve(runtimeRoot, "artifacts");
+
+function trimTrailingSlash(value: string): string {
+  return value.endsWith("/") ? value.slice(0, -1) : value;
+}
+
+function getFrontendUrl(): string {
+  return trimTrailingSlash(process.env.PUBLIC_FRONTEND_URL ?? "http://localhost:3001");
+}
+
+function getApiBaseUrl(req?: { headers?: Record<string, string | string[] | undefined> }): string {
+  const explicit = process.env.PUBLIC_API_URL ?? process.env.RENDER_EXTERNAL_URL;
+  if (explicit) {
+    return trimTrailingSlash(explicit);
+  }
+
+  const hostHeader = req?.headers?.host;
+  const host = Array.isArray(hostHeader) ? hostHeader[0] : hostHeader;
+  const protoHeader = req?.headers?.["x-forwarded-proto"];
+  const proto = Array.isArray(protoHeader) ? protoHeader[0] : protoHeader;
+  if (host) {
+    return `${proto || "http"}://${host}`;
+  }
+
+  const port = Number(process.env.PORT ?? 3002);
+  const hostEnv = process.env.HOST ?? "localhost";
+  return `http://${hostEnv}:${port}`;
+}
 
 async function loadPersistedTasks(taskBoard: TaskBoard): Promise<void> {
   try {
@@ -88,16 +116,16 @@ function toTaskView(taskBoard: TaskBoard, agents: { profile: AgentProfile }[]): 
   });
 }
 
-function dashboardHtml(): string {
+function dashboardHtml(frontendUrl: string): string {
   return `<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta http-equiv="refresh" content="0; url=http://localhost:3001/" />
+  <meta http-equiv="refresh" content="0; url=${frontendUrl}/" />
   <title>Agent Marketplace</title>
 </head>
 <body>
-  <p>Redirecting to <a href="http://localhost:3001/">Frontend AgentFlow Dashboard...</a></p>
+  <p>Redirecting to <a href="${frontendUrl}/">Frontend AgentFlow Dashboard...</a></p>
 </body>
 </html>`;
 }
@@ -231,7 +259,7 @@ async function createRuntime() {
     paymentManager,
     reputation,
     tools,
-    workspaceRoot
+    runtimeRoot
   );
 
   const builder = new AgentLoop(
@@ -253,7 +281,7 @@ async function createRuntime() {
     paymentManager,
     reputation,
     tools,
-    workspaceRoot
+    runtimeRoot
   );
 
   const designer = new AgentLoop(
@@ -275,7 +303,7 @@ async function createRuntime() {
     paymentManager,
     reputation,
     tools,
-    workspaceRoot
+    runtimeRoot
   );
 
   [coordinator, builder, designer].forEach((agent) => agent.start());
@@ -706,13 +734,13 @@ async function startHttpServer(): Promise<void> {
 
       if (req.method === "GET" && req.url === "/") {
         res.setHeader("content-type", "text/html; charset=utf-8");
-        res.end(dashboardHtml());
+        res.end(dashboardHtml(getFrontendUrl()));
         return;
       }
 
       if (req.method === "GET" && req.url === "/dashboard") {
         res.setHeader("content-type", "text/html; charset=utf-8");
-        res.end(dashboardHtml());
+        res.end(dashboardHtml(getFrontendUrl()));
         return;
       }
 
@@ -730,7 +758,7 @@ async function startHttpServer(): Promise<void> {
 
       if (req.method === "GET" && req.url === "/docs") {
         res.setHeader("content-type", "text/html; charset=utf-8");
-        res.end(docsHtml());
+        res.end(docsHtml(getApiBaseUrl(req), getFrontendUrl()));
         return;
       }
 
@@ -896,7 +924,7 @@ async function startHttpServer(): Promise<void> {
   });
 
   server.listen(port, host, () => {
-    console.log(`Server running → http://${host}:${port} (dashboard: /dashboard)`);
+    console.log(`Server running → http://${host}:${port} (dashboard: ${getFrontendUrl()}/dashboard)`);
   });
 }
 
@@ -1167,7 +1195,7 @@ const openApiSpec = {
   }
 } as const;
 
-function docsHtml(): string {
+function docsHtml(apiBaseUrl: string, frontendUrl: string): string {
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -1196,9 +1224,9 @@ function docsHtml(): string {
     <p>Minimal docs inspired by SugarClawdy’s “docs + OpenAPI” pattern: a human page plus a machine-readable spec.</p>
 
     <div class="panel">
-      <p><strong>OpenAPI JSON:</strong> <a href="/openapi" target="_blank" rel="noreferrer">/openapi</a></p>
-      <p><strong>Dashboard:</strong> <a href="/dashboard">/dashboard</a></p>
-      <p><strong>Bootstrap:</strong> <a href="/bootstrap" target="_blank" rel="noreferrer">/bootstrap</a></p>
+      <p><strong>OpenAPI JSON:</strong> <a href="${apiBaseUrl}/openapi" target="_blank" rel="noreferrer">${apiBaseUrl}/openapi</a></p>
+      <p><strong>Dashboard:</strong> <a href="${frontendUrl}/dashboard" target="_blank" rel="noreferrer">${frontendUrl}/dashboard</a></p>
+      <p><strong>Bootstrap:</strong> <a href="${apiBaseUrl}/bootstrap" target="_blank" rel="noreferrer">${apiBaseUrl}/bootstrap</a></p>
     </div>
 
     <div class="panel warn">
@@ -1218,18 +1246,23 @@ AGENTFLOW_REPUTATION_ADDRESS=0x...
 # keys for local demo only (never commit real keys)
 AGENT_OWNER_KEY=0x...
 AGENT_BUILDER_KEY=0x...
-AGENT_DESIGN_KEY=0x...</code></pre>
+AGENT_DESIGN_KEY=0x...
+
+# deployment-friendly URLs and storage
+PUBLIC_FRONTEND_URL=${frontendUrl}
+PUBLIC_API_URL=${apiBaseUrl}
+AGENTFLOW_RUNTIME_DIR=/var/data/agentflow</code></pre>
 
       <p><strong>Submit a task</strong> (returns immediately, processing is async):</p>
-      <pre><code>curl -X POST http://localhost:3002/tasks \\
+      <pre><code>curl -X POST ${apiBaseUrl}/tasks \\
   -H "content-type: application/json" \\
   -d '{"description":"build a landing page","reward":5,"deadline":1730000000}'</code></pre>
       <p><strong>List tasks</strong>:</p>
-      <pre><code>curl http://localhost:3002/tasks</code></pre>
+      <pre><code>curl ${apiBaseUrl}/tasks</code></pre>
       <p><strong>Get one task</strong>:</p>
-      <pre><code>curl http://localhost:3002/tasks/task-123</code></pre>
+      <pre><code>curl ${apiBaseUrl}/tasks/task-123</code></pre>
       <p><strong>List agents</strong>:</p>
-      <pre><code>curl http://localhost:3002/agents</code></pre>
+      <pre><code>curl ${apiBaseUrl}/agents</code></pre>
     </div>
   </main>
 </body>
