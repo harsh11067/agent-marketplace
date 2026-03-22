@@ -1,43 +1,4 @@
-[
-  {
-    "id": "task-1773746728800",
-    "title": "build a landing page for a product launch",
-    "description": "build a landing page for a product launch",
-    "reward": 90,
-    "requirements": [
-      "frontend",
-      "copywriting"
-    ],
-    "createdBy": "agent-owner",
-    "status": "paid",
-    "selectedBidId": "bid-task-1773746728800-agent-design",
-    "escrowId": "escrow-task-1773746728800",
-    "result": {
-      "summary": "Design Agent completed build a landing page for a product launch",
-      "artifactPath": "/home/hash/my-aproject/artifacts/build-a-landing-page-for-a-product-launch-artifact.html",
-      "verificationNotes": "Generated artifact using 3 research signals."
-    }
-  },
-  {
-    "id": "task-1773746977828",
-    "title": "build landing page",
-    "description": "build landing page",
-    "reward": 90,
-    "requirements": [
-      "frontend",
-      "copywriting"
-    ],
-    "createdBy": "agent-owner",
-    "status": "paid",
-    "selectedBidId": "bid-task-1773746977828-agent-design",
-    "selectedAgentId": "agent-design",
-    "escrowId": "escrow-task-1773746977828",
-    "result": {
-      "summary": "Design Agent completed build landing page",
-      "artifactPath": "/home/hash/my-aproject/artifacts/build-landing-page-artifact.html",
-      "verificationNotes": "Generated artifact using 3 research signals."
-    }
-  },
+[]
   {
     "id": "task-1773747840163",
     "title": "Launch page",
@@ -752,6 +713,1212 @@
   {
     "id": "task-1774009811177",
     "createdAt": 1774009811177,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774101820887",
+    "createdAt": 1774101820887,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774101820887-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774101820887",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774101820899",
+    "createdAt": 1774101820899,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774101820899-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774101820899",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774101828855",
+    "createdAt": 1774101828855,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774102233196",
+    "createdAt": 1774102233196,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774102233196-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774102233196",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774102233211",
+    "createdAt": 1774102233211,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774102233211-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774102233211",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774102241227",
+    "createdAt": 1774102241227,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774109219825",
+    "createdAt": 1774109219825,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774109219825-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774109219825",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774109219844",
+    "createdAt": 1774109219844,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774109219844-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774109219844",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774109227857",
+    "createdAt": 1774109227857,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774115808575",
+    "createdAt": 1774115808576,
+    "title": "build a landing page for a product launch",
+    "description": "build a landing page for a product launch",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "failed",
+    "delegator": "0x1111111111111111111111111111111111111111",
+    "delegate": "0x2222222222222222222222222222222222222222",
+    "deadline": 1890000000,
+    "delegation": {
+      "kind": "erc7715-delegation",
+      "chainId": 84532,
+      "delegator": "0x1111111111111111111111111111111111111111",
+      "delegate": "0x2222222222222222222222222222222222222222",
+      "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "capAmount": "5000000",
+      "nonce": "0xabc",
+      "deadline": 1890000000,
+      "signature": "0xsig"
+    },
+    "selectedBidId": "bid-task-1774115808575-agent-design",
+    "selectedAgentId": "agent-design",
+    "failureReason": "payment release failed",
+    "result": {
+      "summary": "Design Agent completed build a landing page for a product launch",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-a-product-launch-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    }
+  },
+  {
+    "id": "task-1774118961639",
+    "createdAt": 1774118961639,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774118961639-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774118961639",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774118961662",
+    "createdAt": 1774118961662,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774118961662-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774118961662",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774118969624",
+    "createdAt": 1774118969624,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774120142839",
+    "createdAt": 1774120142839,
+    "title": "Live autonomous payout test",
+    "description": "build a landing page for a product launch",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "failed",
+    "delegator": "0x1111111111111111111111111111111111111111",
+    "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+    "deadline": 1774123740,
+    "delegation": {
+      "kind": "erc7715-delegation",
+      "chainId": 84532,
+      "delegator": "0x1111111111111111111111111111111111111111",
+      "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+      "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "capAmount": "5000000",
+      "nonce": "0x5915d79d62dfcdaca2ff126f2e51d38302d5fb084465e0eb5d2a12f328335dc2",
+      "deadline": 1774123740,
+      "digest": "0xbd3878b687c252ec5c4a00a5198266ffe4136f0397accb31146683303a5ac806",
+      "signature": "0xtest-signature",
+      "signedAt": 1774120140611
+    },
+    "txHashes": {
+      "jobPosted": "0x7b509a267405c96ebb148e100641a7be346c8265955651a82d38ad46aed73415"
+    },
+    "selectedBidId": "bid-task-1774120142839-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "onchain-job-task-1774120142839",
+    "txHash": "0x7b509a267405c96ebb148e100641a7be346c8265955651a82d38ad46aed73415",
+    "result": {
+      "summary": "Design Agent completed Live autonomous payout test",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\live-autonomous-payout-test-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "failureReason": "payment release failed"
+  },
+  {
+    "id": "task-1774120390709",
+    "createdAt": 1774120390709,
+    "title": "Live autonomous payout test 2",
+    "description": "build a landing page for a product launch",
+    "reward": 50,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "failed",
+    "delegator": "0x1111111111111111111111111111111111111111",
+    "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+    "deadline": 1774123988,
+    "delegation": {
+      "kind": "erc7715-delegation",
+      "chainId": 84532,
+      "delegator": "0x1111111111111111111111111111111111111111",
+      "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+      "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "capAmount": "50000000",
+      "nonce": "0x117dcc62d27cc8a935023e051a98e156d65425e9dc9f1ab8582785417f0c3456",
+      "deadline": 1774123988,
+      "digest": "0x30278a462e7811bd3a5642739f30e209ac453276b5d23839e98c483b3992f68f",
+      "signature": "0xtest-signature",
+      "signedAt": 1774120388474
+    },
+    "selectedBidId": "bid-task-1774120390709-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "onchain-job-task-1774120390709",
+    "result": {
+      "summary": "Design Agent completed Live autonomous payout test 2",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\live-autonomous-payout-test-2-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "failureReason": "payment release failed"
+  },
+  {
+    "id": "task-1774120445386",
+    "createdAt": 1774120445386,
+    "title": "Live autonomous payout test 3",
+    "description": "build a landing page for a product launch",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "delegator": "0x1111111111111111111111111111111111111111",
+    "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+    "deadline": 1774124043,
+    "delegation": {
+      "kind": "erc7715-delegation",
+      "chainId": 84532,
+      "delegator": "0x1111111111111111111111111111111111111111",
+      "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+      "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "capAmount": "5000000",
+      "nonce": "0x83ad774ff213381c94d0942525ec8d9eb7783f90f5a7c255cae86477abf43f48",
+      "deadline": 1774124043,
+      "digest": "0xcbd19380868ea93bea3987f190a91ad483bd4270a954cdf32390ed939fe2e4f2",
+      "signature": "0xtest-signature",
+      "signedAt": 1774120443181
+    },
+    "subDelegation": {
+      "kind": "erc7715-delegation",
+      "chainId": 84532,
+      "delegator": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+      "delegate": "0x2d40DfEaCbAADDf1876e129759DE9D1755cdAA91",
+      "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "capAmount": "5000000",
+      "nonce": "0xcab829d536cd0d0f97ae91b69717a3b51864346db03cb86eab0bd8b8152ab8af",
+      "deadline": 1774124043,
+      "parentDigest": "0xcbd19380868ea93bea3987f190a91ad483bd4270a954cdf32390ed939fe2e4f2",
+      "createdAt": 1774120460268,
+      "digest": "0x5ad5553fe077b8320e701df86626ab1f24a4f14b53c0baa2dbf7c26da6861bef"
+    },
+    "chainJobId": 1,
+    "txHashes": {
+      "jobPosted": "0xce310cdea6401237118cfffd7c92adf8137f42eec22929920dd12c4efd17fe8f",
+      "delegationDigest": "0xcbd19380868ea93bea3987f190a91ad483bd4270a954cdf32390ed939fe2e4f2",
+      "delegationRegistered": "0x16e544a5a64b0b9a7277fa496e4f9890233fb3876350840c20958f6e67b009bc",
+      "delegationSpend": "0x8d1df7bc86aded5090a20b525f42e38c023e9a0e115a218dd50b46a0d3bfb09c",
+      "bid:agent-builder": "0xf0fa6fc729483ed4ab02e857f914e16c1bdc4bfc0b63212b56d691c6a978c8fd",
+      "jobAssigned": "0xa00f1bdd763f616b6230f4cdf9184f35a794c15a060198df6e6f82535dfc489d",
+      "bid:agent-design": "0x0263a1e86f8ab3bc11b560770154351a50786a0e7b5e050ef5d6b1e7b32e1217",
+      "subDelegationDigest": "0x5ad5553fe077b8320e701df86626ab1f24a4f14b53c0baa2dbf7c26da6861bef",
+      "subDelegationRegistered": "0x70f66246628b4cc22b473c5e01879fd1dc81f3079c3f288388cdb14ce9ef7676",
+      "jobCompleted": "0x9967a8480a3b439760a2bc6ba43ac8ea8f45f4aec46ee35ef809f479dad57699",
+      "subDelegationSpend": "0xcf208133bfccb61dbedb073dd50b6809a982752384309b8bf60dd85695cdbcc2"
+    },
+    "selectedBidId": "bid-task-1774120445386-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "onchain-job-1",
+    "txHash": "0xce310cdea6401237118cfffd7c92adf8137f42eec22929920dd12c4efd17fe8f",
+    "result": {
+      "summary": "Design Agent completed Live autonomous payout test 3",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\live-autonomous-payout-test-3-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "uniswap",
+      "status": "settled",
+      "tokenInAddress": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "tokenOutAddress": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "amountIn": "5000000",
+      "orderId": "direct-transfer"
+    }
+  },
+  {
+    "id": "task-1774120739319",
+    "createdAt": 1774120739319,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774120739319-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774120739319",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774120739330",
+    "createdAt": 1774120739330,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774120739330-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774120739330",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774120747428",
+    "createdAt": 1774120747428,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774123083108",
+    "createdAt": 1774123083108,
+    "title": "Live uniswap swap payout test",
+    "description": "build a landing page for a product launch",
+    "reward": 1,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "delegator": "0x1111111111111111111111111111111111111111",
+    "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+    "deadline": 1774126680,
+    "delegation": {
+      "kind": "erc7715-delegation",
+      "chainId": 84532,
+      "delegator": "0x1111111111111111111111111111111111111111",
+      "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+      "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "capAmount": "1000000",
+      "nonce": "0x30b9014eebfae13f1a076af7a9ff6041f4a18e72bbb7d280cf08b2247bf4bc01",
+      "deadline": 1774126680,
+      "digest": "0xf36dfe6bd40ca2aacae34688e4a917eecbd5e838bb6e1679b6ebe8929bf054e7",
+      "signature": "0xtest-signature",
+      "signedAt": 1774123080848
+    },
+    "subDelegation": {
+      "kind": "erc7715-delegation",
+      "chainId": 84532,
+      "delegator": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+      "delegate": "0x2d40DfEaCbAADDf1876e129759DE9D1755cdAA91",
+      "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "capAmount": "1000000",
+      "nonce": "0xfafaf8ff36d78ed3b13ce45eb3aae3b5fa8bf9bcc0355e8d50c17875bd1cfa99",
+      "deadline": 1774126680,
+      "parentDigest": "0xf36dfe6bd40ca2aacae34688e4a917eecbd5e838bb6e1679b6ebe8929bf054e7",
+      "createdAt": 1774123102689,
+      "digest": "0xa392f7a93a8f126ad55d0744a01d8a8a4d0ada0fb67dcf143e3aacec8ebaa992"
+    },
+    "chainJobId": 2,
+    "txHashes": {
+      "jobPosted": "0x501a520d57bed6dfedf2f727f4cfe3e184e58a89ca59e1971dc72d6f55466b08",
+      "delegationDigest": "0xf36dfe6bd40ca2aacae34688e4a917eecbd5e838bb6e1679b6ebe8929bf054e7",
+      "delegationRegistered": "0x56f6cdd77b3fb71876ba9eb1ea5c0e2bac3adb0bcfd232e02554ccbe6c0275d1",
+      "bid:agent-builder": "0xca176277c134fbc54245608343c81ad96ce5b094e3c65afc4052fbaec424c047",
+      "delegationSpend": "0xa97a2e57322d7dbccff989543fce636ad32644d1cdf59d0cf8888ce89d92bbef",
+      "bid:agent-design": "0xf82aea0e0d82ea83467a84c81e63cf68849470f44cab5c00ac02710112b54708",
+      "jobAssigned": "0x3a022add0f004ef9ae8c55be7d07bfa1b25f1e30bce51feed39214a2d336cbaa",
+      "subDelegationDigest": "0xa392f7a93a8f126ad55d0744a01d8a8a4d0ada0fb67dcf143e3aacec8ebaa992",
+      "subDelegationRegistered": "0xf2af06cffaae8e5d90cab6fc19990ac13bf5f5d5565620c0f12d8a4ecc91da6c",
+      "jobCompleted": "0x975b30b1f4fffd9aa4ab82e18f3b6b6f11f0261106d98d118a7f91f7be798fac",
+      "subDelegationSpend": "0x90bf7e4e4fb19892eedd99161d9b7f66876c88770cac39afcb8d47410c611cb9"
+    },
+    "selectedBidId": "bid-task-1774123083108-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "onchain-job-2",
+    "txHash": "0x501a520d57bed6dfedf2f727f4cfe3e184e58a89ca59e1971dc72d6f55466b08",
+    "result": {
+      "summary": "Design Agent completed Live uniswap swap payout test",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\live-uniswap-swap-payout-test-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "uniswap",
+      "status": "settled",
+      "tokenInAddress": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "tokenOutAddress": "0x4200000000000000000000000000000000000006",
+      "amountIn": "1000000",
+      "orderId": "uniswap-v2-direct",
+      "txHash": "0xdc676951da076f881d07db7d01b0bb2bc60c1cd68bd83be9d662efdabb95f8db"
+    }
+  },
+  {
+    "id": "task-1774123552312",
+    "createdAt": 1774123552312,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774123552312-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774123552312",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774123552334",
+    "createdAt": 1774123552334,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774123552334-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774123552334",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774123560420",
+    "createdAt": 1774123560420,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774125835406",
+    "createdAt": 1774125835406,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774125835406-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774125835406",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774125835425",
+    "createdAt": 1774125835425,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774125835425-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774125835425",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774125843399",
+    "createdAt": 1774125843399,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774126875599",
+    "createdAt": 1774126875599,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774126875599-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774126875599",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774126875614",
+    "createdAt": 1774126875614,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774126875614-agent-design",
+    "selectedAgentId": "agent-design",
+    "escrowId": "escrow-task-1774126875614",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774126883596",
+    "createdAt": 1774126883596,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774129685369",
+    "createdAt": 1774129685369,
+    "title": "validate live delegated build flow",
+    "description": "validate live delegated build flow",
+    "reward": 5,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "deadline": 1774153085,
+    "subDelegation": {
+      "kind": "erc7715-delegation",
+      "chainId": 84532,
+      "delegator": "0x377e8e68Ed443b0BA38e3872Ce90632275963539",
+      "delegate": "0x377e8e68Ed443b0BA38e3872Ce90632275963539",
+      "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "capAmount": "5000000",
+      "nonce": "0x6ca8b9e7c30424ca976e77917fde3e5f925069caf2fe9c1800febca377e7a6c9",
+      "deadline": 1774153085,
+      "createdAt": 1774129700224,
+      "digest": "0xb14d5c320923605a9c5e54295eef38b528f4f1735137bb0b5d92ea472d5472cd"
+    },
+    "chainJobId": 4,
+    "txHashes": {
+      "jobPosted": "0x38c6a0b1fdb2fcd437d478912e31cf7643ec9bdc3c3ba2285401ba44983ca9b3",
+      "jobAssigned": "0xde1ed5673b690cde78f6b35fdc08bee0fb16ff188a061935a20b2e3f04725164",
+      "subDelegationDigest": "0xb14d5c320923605a9c5e54295eef38b528f4f1735137bb0b5d92ea472d5472cd",
+      "subDelegationRegistered": "0x8e034ccebae7b92c4fb75967560a10cd65c9384f0921cd5550a6468b350c99ff",
+      "jobCompleted": "0x48298f26cac4bb173086332cc2573aba4ff3e027aef09c5e1cc8df9340bc07b4",
+      "subDelegationSpend": "0xb621398d33912ddb1254ff9fed03a4158d94bb8a9735409128bb609129a2d913"
+    },
+    "selectedBidId": "bid-task-1774129685369-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "escrowId": "onchain-job-4",
+    "txHash": "0x38c6a0b1fdb2fcd437d478912e31cf7643ec9bdc3c3ba2285401ba44983ca9b3",
+    "result": {
+      "summary": "Builder Agent completed validate live delegated build flow",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\validate-live-delegated-build-flow-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    },
+    "settlement": {
+      "provider": "uniswap",
+      "status": "settled",
+      "tokenInAddress": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "tokenOutAddress": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "amountIn": "5000000",
+      "orderId": "direct-transfer"
+    }
+  },
+  {
+    "id": "task-1774132009329",
+    "createdAt": 1774132009329,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774132009329-agent-design",
+    "selectedAgentId": "agent-design",
+    "selectedBidPrice": 5,
+    "escrowId": "escrow-task-1774132009329",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774132009345",
+    "createdAt": 1774132009345,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774132009345-agent-design",
+    "selectedAgentId": "agent-design",
+    "selectedBidPrice": 6,
+    "escrowId": "escrow-task-1774132009345",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774132017450",
+    "createdAt": 1774132017450,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774132226046",
+    "createdAt": 1774132226046,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774132226046-agent-design",
+    "selectedAgentId": "agent-design",
+    "selectedBidPrice": 5,
+    "escrowId": "escrow-task-1774132226046",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774132226061",
+    "createdAt": 1774132226061,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774132226061-agent-design",
+    "selectedAgentId": "agent-design",
+    "selectedBidPrice": 6,
+    "escrowId": "escrow-task-1774132226061",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774132234007",
+    "createdAt": 1774132234007,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774167941187",
+    "createdAt": 1774167941187,
+    "title": "test",
+    "description": "test",
+    "reward": 5,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "failed",
+    "delegator": "0x3274e860fa4d3372bd120b61367a7555713417a8",
+    "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+    "deadline": 1774171540,
+    "delegation": {
+      "kind": "erc7715-delegation",
+      "chainId": 84532,
+      "delegator": "0x3274e860fa4d3372bd120b61367a7555713417a8",
+      "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+      "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "capAmount": "5000000",
+      "nonce": "0xdba4569cf4a411cf815412d6bda3d7a60cc36006871ec3b5cd47cd68bb917dba",
+      "salt": "0xdba4569cf4a411cf815412d6bda3d7a60cc36006871ec3b5cd47cd68bb917dba",
+      "authority": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "caveats": [
+        {
+          "enforcer": "0x92Bf12322527cAA612fd31a0e810472BBB106A8F",
+          "terms": "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "args": "0x"
+        },
+        {
+          "enforcer": "0xf100b0819427117EcF76Ed94B358B1A5b5C6D2Fc",
+          "terms": "0x036CbD53842c5426634e7929541eC2318f3dCF7e00000000000000000000000000000000000000000000000000000000004c4b40",
+          "args": "0x"
+        },
+        {
+          "enforcer": "0x1046bb45C8d673d4ea75321280DB34899413c069",
+          "terms": "0x0000000000000000000000000000000000000000000000000000000069bfb594",
+          "args": "0x"
+        }
+      ],
+      "deadline": 1774171540,
+      "delegationManager": "0xdb9B1e94B5b69Df7e401DDbedE43491141047dB3",
+      "digest": "0x251bb8b52203977aa0a2704197c25a8ce0e724ecc92504db4b995f8b6f4015f2",
+      "signedAt": 1774167941076
+    },
+    "metamaskPermission": null,
+    "selectedBidId": "bid-task-1774167941187-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "selectedBidPrice": 5,
+    "escrowId": "onchain-job-task-1774167941187",
+    "result": {
+      "summary": "Builder Agent completed test",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\test-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    },
+    "failureReason": "payment release failed"
+  },
+  {
+    "id": "task-1774168194414",
+    "createdAt": 1774168194414,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774168194414-agent-design",
+    "selectedAgentId": "agent-design",
+    "selectedBidPrice": 5,
+    "escrowId": "escrow-task-1774168194414",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774168194426",
+    "createdAt": 1774168194426,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774168194426-agent-design",
+    "selectedAgentId": "agent-design",
+    "selectedBidPrice": 6,
+    "escrowId": "escrow-task-1774168194426",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774168202508",
+    "createdAt": 1774168202508,
+    "title": "create a marketing page with hero section",
+    "description": "create a marketing page with hero section",
+    "reward": 7,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "bidding"
+  },
+  {
+    "id": "task-1774168613468",
+    "createdAt": 1774168613468,
+    "title": "smoke after escrow fallback fix",
+    "description": "smoke after escrow fallback fix",
+    "reward": 5,
+    "requirements": [
+      "generalist"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "delegator": "0x3274e860fa4d3372bd120b61367a7555713417a8",
+    "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+    "deadline": 1774192013,
+    "delegation": {
+      "delegationManager": "0xdb9B1e94B5b69Df7e401DDbedE43491141047dB3",
+      "nonce": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "authority": "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "signedAt": 1774168613340,
+      "chainId": 84532,
+      "caveats": [],
+      "token": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "kind": "erc7715-delegation",
+      "deadline": 1774192013,
+      "delegate": "0xC2B7C2B9C923941A14b3e1f42897b1769EEA28C3",
+      "delegator": "0x3274e860fa4d3372bd120b61367a7555713417a8",
+      "salt": "0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef",
+      "capAmount": "5000000"
+    },
+    "selectedBidId": "bid-task-1774168613468-agent-builder",
+    "selectedAgentId": "agent-builder",
+    "selectedBidPrice": 5,
+    "escrowId": "escrow-task-1774168613468",
+    "result": {
+      "summary": "Builder Agent completed smoke after escrow fallback fix",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\smoke-after-escrow-fallback-fix-artifact.html",
+      "verificationNotes": "Generated artifact using 1 research signals."
+    },
+    "settlement": {
+      "provider": "uniswap",
+      "status": "settled",
+      "tokenInAddress": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "tokenOutAddress": "0x036CbD53842c5426634e7929541eC2318f3dCF7e",
+      "amountIn": "5000000",
+      "orderId": "direct-transfer"
+    }
+  },
+  {
+    "id": "task-1774168925864",
+    "createdAt": 1774168925864,
+    "title": "build a landing page for wallet onboarding",
+    "description": "build a landing page for wallet onboarding",
+    "reward": 5,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774168925864-agent-design",
+    "selectedAgentId": "agent-design",
+    "selectedBidPrice": 5,
+    "escrowId": "escrow-task-1774168925864",
+    "result": {
+      "summary": "Design Agent completed build a landing page for wallet onboarding",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-for-wallet-onboarding-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774168925876",
+    "createdAt": 1774168925876,
+    "title": "build a landing page and branding copy",
+    "description": "build a landing page and branding copy",
+    "reward": 6,
+    "requirements": [
+      "frontend",
+      "copywriting"
+    ],
+    "createdBy": "agent-owner",
+    "status": "completed",
+    "selectedBidId": "bid-task-1774168925876-agent-design",
+    "selectedAgentId": "agent-design",
+    "selectedBidPrice": 6,
+    "escrowId": "escrow-task-1774168925876",
+    "result": {
+      "summary": "Design Agent completed build a landing page and branding copy",
+      "artifactPath": "C:\\Users\\aryan\\agent-marketplace\\artifacts\\build-a-landing-page-and-branding-copy-artifact.html",
+      "verificationNotes": "Generated artifact using 3 research signals."
+    },
+    "settlement": {
+      "provider": "mock",
+      "status": "skipped",
+      "reason": "UNISWAP_API_KEY not configured"
+    }
+  },
+  {
+    "id": "task-1774168934009",
+    "createdAt": 1774168934009,
     "title": "create a marketing page with hero section",
     "description": "create a marketing page with hero section",
     "reward": 7,

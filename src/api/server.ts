@@ -14,16 +14,26 @@ import { TaskBoard } from "../marketplace/taskBoard.ts";
 import { CodeGeneratorTool } from "../tools/codeGenerator.ts";
 import { FileWriterTool } from "../tools/fileWriter.ts";
 import { WebSearchTool } from "../tools/webSearch.ts";
-import type { AgentProfile, Task, TaskView } from "../types.ts";
+import type { AgentProfile, MetaMaskPermissionRecord, Task, TaskView } from "../types.ts";
 import {
   approveUsdcIfNeeded,
   assignJobOnchain,
   completeJobOnchain,
+  deriveManagedAddresses,
   isOnchainEnabled,
   loadOnchainConfigFromEnv,
   postJobOnchain,
+  recordDelegationSpendOnchain,
+  registerDelegationOnchain,
   submitBidOnchain
 } from "../onchain/agentflowMarketplace.ts";
+import { createIpfsUploaderFromEnv, type IpfsJsonUploader } from "../shared/ipfs.ts";
+import { delegatedApproveUsdc, delegatedAssignJob, delegatedPostJob } from "../shared/metamaskDelegation.ts";
+import { createSignedSubDelegation } from "../shared/metamaskToolkitDelegation.ts";
+import { isUniswapConfigured } from "../shared/uniswap.ts";
+import { loadChainIdFromEnv, resolveManagedWallet } from "../shared/wallet.ts";
+import type { DelegationRecord, SubDelegationRecord } from "../types.ts";
+import { createDelegationDigest, createDelegationNonce } from "../shared/delegation.ts";
 
 const workspaceRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../..");
 const dataDir = resolve(workspaceRoot, "data");
@@ -162,13 +172,34 @@ async function createRuntime() {
   const memory = new AgentMemory();
   const reputation = new ReputationStore();
   const biddingEngine = new BiddingEngine(reputation);
-  const walletByAgentId: Record<string, string> = {
-    "agent-owner": process.env.AGENT_OWNER_WALLET ?? "",
-    "agent-builder": process.env.AGENT_BUILDER_WALLET ?? "",
-    "agent-design": process.env.AGENT_DESIGN_WALLET ?? ""
-  };
-  const paymentManager = new PaymentManager(createEscrowContract(), walletByAgentId);
   const onchainConfig = loadOnchainConfigFromEnv();
+  const derivedAddresses = deriveManagedAddresses(onchainConfig);
+  const walletByAgentId: Record<string, string> = {
+    "agent-owner": resolveManagedWallet({
+      explicitAddress: process.env.AGENT_OWNER_WALLET,
+      privateKey: onchainConfig.orchestratorKey
+    }) || derivedAddresses.orchestratorAddress,
+    "agent-builder": resolveManagedWallet({
+      explicitAddress: process.env.AGENT_BUILDER_WALLET,
+      privateKey: onchainConfig.builderKey
+    }) || derivedAddresses.builderAddress,
+    "agent-design": resolveManagedWallet({
+      explicitAddress: process.env.AGENT_DESIGN_WALLET,
+      privateKey: onchainConfig.designKey
+    }) || derivedAddresses.designAddress
+  };
+  const keyByAgentId: Record<string, string> = {
+    "agent-owner": onchainConfig.orchestratorKey ?? "",
+    "agent-builder": onchainConfig.builderKey ?? "",
+    "agent-design": onchainConfig.designKey ?? ""
+  };
+  const paymentManager = new PaymentManager(createEscrowContract(), walletByAgentId, keyByAgentId);
+  let ipfsUploader: IpfsJsonUploader | undefined;
+  try {
+    ipfsUploader = createIpfsUploaderFromEnv();
+  } catch {
+    ipfsUploader = undefined;
+  }
 
   const tools = {
     webSearch: new WebSearchTool(),
@@ -188,7 +219,10 @@ async function createRuntime() {
       role: "coordinator",
       budget: 250,
       capabilities: ["planning", "verification"],
-      minPrice: 0
+      minPrice: 0,
+      walletAddress: walletByAgentId["agent-owner"],
+      preferredTokenAddress: onchainConfig.usdcAddress,
+      preferredTokenSymbol: "USDC"
     },
     taskBoard,
     planner,
@@ -207,7 +241,10 @@ async function createRuntime() {
       role: "worker",
       budget: 0,
       capabilities: ["frontend", "copywriting", "generalist"],
-      minPrice: 30
+      minPrice: 30,
+      walletAddress: walletByAgentId["agent-builder"],
+      preferredTokenAddress: process.env.AGENT_BUILDER_PREFERRED_TOKEN ?? onchainConfig.usdcAddress,
+      preferredTokenSymbol: process.env.AGENT_BUILDER_PREFERRED_SYMBOL ?? "ETH"
     },
     taskBoard,
     planner,
@@ -226,7 +263,10 @@ async function createRuntime() {
       role: "worker",
       budget: 0,
       capabilities: ["frontend", "branding", "copywriting"],
-      minPrice: 40
+      minPrice: 40,
+      walletAddress: walletByAgentId["agent-design"],
+      preferredTokenAddress: process.env.AGENT_DESIGN_PREFERRED_TOKEN ?? onchainConfig.usdcAddress,
+      preferredTokenSymbol: process.env.AGENT_DESIGN_PREFERRED_SYMBOL ?? "USDC"
     },
     taskBoard,
     planner,
@@ -256,6 +296,7 @@ async function createRuntime() {
   // On-chain glue (minimal): mirror off-chain lifecycle into Base Sepolia if configured.
   // This keeps the existing architecture intact and only augments tasks with chain metadata.
   if (isOnchainEnabled(onchainConfig)) {
+    const delegationBudgetAddress = onchainConfig.delegationBudgetAddress ?? "";
     taskBoard.on("taskPosted", (task: Task) => {
       void (async () => {
         try {
@@ -269,23 +310,60 @@ async function createRuntime() {
             : Math.floor(Date.now() / 1000) + 3600;
 
           const budgetUsdc6 = BigInt(Math.max(1, Math.floor((task.reward ?? 1) * 1_000_000)));
+          const delegatedContext = task.metamaskPermission?.context;
+          const delegatedManager = task.metamaskPermission?.signerMeta?.delegationManager;
+          let taskURI = `local://${task.id}`;
+          if (ipfsUploader) {
+            const uploadedTask = await ipfsUploader({
+              kind: "agentflow-task",
+              taskId: task.id,
+              title: task.title,
+              description: task.description,
+              reward: task.reward,
+              requirements: task.requirements,
+              createdAt: task.createdAt ?? Date.now(),
+              delegation: task.delegation ?? null
+            });
+            taskURI = uploadedTask.uri;
+          }
 
-          const approval = await approveUsdcIfNeeded({
-            rpcUrl: onchainConfig.rpcUrl,
-            usdcAddress: onchainConfig.usdcAddress,
-            spender: onchainConfig.marketplaceAddress,
-            ownerKey: orchestratorKey,
-            minAmount: budgetUsdc6
-          });
+          const approval = delegatedContext && delegatedManager
+            ? await delegatedApproveUsdc({
+                rpcUrl: onchainConfig.rpcUrl,
+                orchestratorKey,
+                permissionsContext: delegatedContext as `0x${string}`,
+                delegationManager: delegatedManager as `0x${string}`,
+                usdcAddress: onchainConfig.usdcAddress as `0x${string}`,
+                spender: onchainConfig.marketplaceAddress as `0x${string}`,
+                amount: budgetUsdc6
+              }).then((result) => ({ approved: true, txHash: result.txHash, allowance: budgetUsdc6 }))
+            : await approveUsdcIfNeeded({
+                rpcUrl: onchainConfig.rpcUrl,
+                usdcAddress: onchainConfig.usdcAddress,
+                spender: onchainConfig.marketplaceAddress,
+                ownerKey: orchestratorKey,
+                minAmount: budgetUsdc6
+              });
 
-          const posted = await postJobOnchain({
-            rpcUrl: onchainConfig.rpcUrl,
-            marketplaceAddress: onchainConfig.marketplaceAddress,
-            orchestratorKey,
-            taskURI: `local://${task.id}`,
-            budgetUsdc6,
-            deadlineUnix
-          });
+          const posted = delegatedContext && delegatedManager
+            ? await delegatedPostJob({
+                rpcUrl: onchainConfig.rpcUrl,
+                orchestratorKey,
+                permissionsContext: delegatedContext as `0x${string}`,
+                delegationManager: delegatedManager as `0x${string}`,
+                marketplaceAddress: onchainConfig.marketplaceAddress as `0x${string}`,
+                taskURI,
+                budgetUsdc6,
+                deadlineUnix
+              })
+            : await postJobOnchain({
+                rpcUrl: onchainConfig.rpcUrl,
+                marketplaceAddress: onchainConfig.marketplaceAddress,
+                orchestratorKey,
+                taskURI,
+                budgetUsdc6,
+                deadlineUnix
+              });
 
           const live = taskBoard.getTask(task.id);
           if (live) {
@@ -296,6 +374,51 @@ async function createRuntime() {
               jobPosted: posted.txHash
             };
             live.deadline = deadlineUnix;
+            if (delegationBudgetAddress && live.delegation) {
+              const delegationHash = live.delegation.digest ?? createDelegationDigest({
+                chainId: live.delegation.chainId,
+                delegator: live.delegation.delegator,
+                delegate: live.delegation.delegate,
+                token: live.delegation.token,
+                capAmount: live.delegation.capAmount,
+                deadline: live.delegation.deadline,
+                nonce: live.delegation.nonce
+              });
+              live.delegation.digest = delegationHash;
+              live.txHashes = {
+                ...(live.txHashes ?? {}),
+                delegationDigest: delegationHash
+              };
+              persist();
+
+              const registered = await registerDelegationOnchain({
+                rpcUrl: onchainConfig.rpcUrl,
+                delegationBudgetAddress,
+                actorKey: orchestratorKey,
+                delegationHash,
+                delegator: live.delegation.delegator,
+                delegate: live.delegation.delegate,
+                cap: BigInt(live.delegation.capAmount),
+                deadlineUnix: live.delegation.deadline
+              });
+              live.txHashes = {
+                ...(live.txHashes ?? {}),
+                delegationRegistered: registered.txHash
+              };
+              persist();
+
+              const spent = await recordDelegationSpendOnchain({
+                rpcUrl: onchainConfig.rpcUrl,
+                delegationBudgetAddress,
+                delegateKey: orchestratorKey,
+                delegationHash,
+                amount: budgetUsdc6
+              });
+              live.txHashes = {
+                ...(live.txHashes ?? {}),
+                delegationSpend: spent.txHash
+              };
+            }
           }
           persist();
         } catch (error) {
@@ -323,13 +446,26 @@ async function createRuntime() {
           }
 
           const priceUsdc6 = BigInt(Math.max(1, Math.floor(bid.price * 1_000_000)));
+          let metadataURI = `local://bid/${bid.id}`;
+          if (ipfsUploader) {
+            const uploadedBid = await ipfsUploader({
+              kind: "agentflow-bid",
+              bidId: bid.id,
+              taskId: bid.taskId,
+              agentId: bid.agentId,
+              price: bid.price,
+              rationale: bid.rationale,
+              createdAt: bid.createdAt
+            });
+            metadataURI = uploadedBid.uri;
+          }
           const submitted = await submitBidOnchain({
             rpcUrl: onchainConfig.rpcUrl,
             marketplaceAddress: onchainConfig.marketplaceAddress,
             agentKey,
             jobId: task.chainJobId,
             priceUsdc6,
-            metadataURI: `local://bid/${bid.id}`
+            metadataURI
           });
 
           task.txHashes = {
@@ -359,27 +495,92 @@ async function createRuntime() {
             throw new Error(`missing wallet address for ${bid.agentId}`);
           }
           const agreedPriceUsdc6 = BigInt(Math.max(1, Math.floor(bid.price * 1_000_000)));
-          const assigned = await assignJobOnchain({
-            rpcUrl: onchainConfig.rpcUrl,
-            marketplaceAddress: onchainConfig.marketplaceAddress,
-            orchestratorKey,
-            jobId: task.chainJobId,
-            winnerAddress,
-            agreedPriceUsdc6
-          });
+          const delegatedContext = task.metamaskPermission?.context;
+          const delegatedManager = task.metamaskPermission?.signerMeta?.delegationManager;
+          const assigned = delegatedContext && delegatedManager
+            ? await delegatedAssignJob({
+                rpcUrl: onchainConfig.rpcUrl,
+                orchestratorKey,
+                permissionsContext: delegatedContext as `0x${string}`,
+                delegationManager: delegatedManager as `0x${string}`,
+                marketplaceAddress: onchainConfig.marketplaceAddress as `0x${string}`,
+                jobId: task.chainJobId,
+                winnerAddress: winnerAddress as `0x${string}`,
+                agreedPriceUsdc6
+              })
+            : await assignJobOnchain({
+                rpcUrl: onchainConfig.rpcUrl,
+                marketplaceAddress: onchainConfig.marketplaceAddress,
+                orchestratorKey,
+                jobId: task.chainJobId,
+                winnerAddress,
+                agreedPriceUsdc6
+              });
           task.txHashes = {
             ...(task.txHashes ?? {}),
             jobAssigned: assigned.txHash
           };
           // Minimal sub-delegation record (User → Orchestrator → Specialist). The cryptographic
           // delegation execution is handled by MetaMask tooling; here we persist linkage for the UI/demo.
-          task.subDelegation = {
-            parent: task.delegation ?? null,
-            delegator: task.delegate ?? task.delegator ?? null,
+          const parentDelegation = task.delegation;
+          const subDelegation = await createSignedSubDelegation({
+            chainId: loadChainIdFromEnv(),
+            orchestratorKey,
+            parentDelegation: parentDelegation ?? {
+              kind: "erc7715-delegation",
+              chainId: loadChainIdFromEnv(),
+              delegator: task.delegator ?? winnerAddress,
+              delegate: task.delegate ?? winnerAddress,
+              token: onchainConfig.usdcAddress,
+              capAmount: String(Math.max(1, Math.floor((task.reward ?? 1) * 1_000_000))),
+              nonce: createDelegationNonce(`${task.id}:parent`),
+              deadline: task.deadline ?? Math.floor(Date.now() / 1000) + 3600
+            },
+            specialistAddress: winnerAddress,
+            tokenAddress: onchainConfig.usdcAddress,
+            capAmount: String(Math.max(1, Math.floor(bid.price * 1_000_000))),
+            deadlineUnix: task.deadline ?? Math.floor(Date.now() / 1000) + 3600,
+            saltSeed: `${task.id}:${bid.agentId}`
+          }) ?? {
+            kind: "erc7715-delegation",
+            chainId: loadChainIdFromEnv(),
+            delegator: task.delegate ?? task.delegator ?? winnerAddress,
             delegate: winnerAddress,
-            capUsdc: bid.price,
+            token: onchainConfig.usdcAddress,
+            capAmount: String(Math.max(1, Math.floor(bid.price * 1_000_000))),
+            nonce: createDelegationNonce(`${task.id}:${bid.agentId}`),
+            deadline: task.deadline ?? Math.floor(Date.now() / 1000) + 3600,
+            parentDigest: parentDelegation?.digest,
             createdAt: Date.now()
-          };
+          } satisfies SubDelegationRecord;
+          if (delegationBudgetAddress) {
+            const subDelegationHash = createDelegationDigest({
+              chainId: subDelegation.chainId,
+              delegator: subDelegation.delegator,
+              delegate: subDelegation.delegate,
+              token: subDelegation.token,
+              capAmount: subDelegation.capAmount,
+              deadline: subDelegation.deadline,
+              nonce: subDelegation.nonce
+            });
+            subDelegation.digest = subDelegationHash;
+            const registered = await registerDelegationOnchain({
+              rpcUrl: onchainConfig.rpcUrl,
+              delegationBudgetAddress,
+              actorKey: orchestratorKey,
+              delegationHash: subDelegationHash,
+              delegator: subDelegation.delegator,
+              delegate: subDelegation.delegate,
+              cap: BigInt(subDelegation.capAmount),
+              deadlineUnix: subDelegation.deadline
+            });
+            task.txHashes = {
+              ...(task.txHashes ?? {}),
+              subDelegationDigest: subDelegationHash,
+              subDelegationRegistered: registered.txHash
+            };
+          }
+          task.subDelegation = subDelegation;
           persist();
         } catch (error) {
           const message = error instanceof Error ? error.message : String(error);
@@ -407,18 +608,50 @@ async function createRuntime() {
             throw new Error(`missing agent key for ${agentId}`);
           }
 
+          let resultURI = result?.artifactPath ? `local://${result.artifactPath}` : `local://result/${task.id}`;
+          if (ipfsUploader) {
+            const uploadedResult = await ipfsUploader({
+              kind: "agentflow-result",
+              taskId: task.id,
+              summary: result?.summary ?? "",
+              artifactPath: result?.artifactPath ?? "",
+              verificationNotes: result?.verificationNotes ?? ""
+            });
+            resultURI = uploadedResult.uri;
+          }
+
           const completed = await completeJobOnchain({
             rpcUrl: onchainConfig.rpcUrl,
             marketplaceAddress: onchainConfig.marketplaceAddress,
             agentKey,
             jobId: task.chainJobId,
-            resultURI: result?.artifactPath ? `local://${result.artifactPath}` : `local://result/${task.id}`
+            resultURI
           });
 
           task.txHashes = {
             ...(task.txHashes ?? {}),
             jobCompleted: completed.txHash
           };
+          persist();
+          if (delegationBudgetAddress && task.subDelegation?.digest) {
+            const winningBid = task.selectedBidId
+              ? taskBoard.getBids(task.id).find((item) => item.id === task.selectedBidId)
+              : undefined;
+            const amountUsdc6 = BigInt(
+              Math.max(1, Math.floor((winningBid?.price ?? task.reward ?? 1) * 1_000_000))
+            );
+            const spent = await recordDelegationSpendOnchain({
+              rpcUrl: onchainConfig.rpcUrl,
+              delegationBudgetAddress,
+              delegateKey: agentKey,
+              delegationHash: task.subDelegation.digest,
+              amount: amountUsdc6
+            });
+            task.txHashes = {
+              ...(task.txHashes ?? {}),
+              subDelegationSpend: spent.txHash
+            };
+          }
           persist();
         } catch (error) {
           const message = error instanceof Error ? error.message : String(error);
@@ -502,11 +735,18 @@ async function startHttpServer(): Promise<void> {
       }
 
       if (req.method === "GET" && req.url === "/bootstrap") {
+        const bootstrapOnchain = loadOnchainConfigFromEnv();
+        const bootstrapManaged = deriveManagedAddresses(bootstrapOnchain);
         res.setHeader("content-type", "application/json; charset=utf-8");
         res.end(
         JSON.stringify(
           {
-            orchestratorAddress: process.env.AGENT_OWNER_WALLET ?? ""
+            orchestratorAddress: process.env.AGENT_OWNER_WALLET ?? bootstrapManaged.orchestratorAddress
+            ,
+            chainId: loadChainIdFromEnv(),
+            usdcAddress: process.env.AGENTFLOW_USDC_ADDRESS ?? "",
+            delegationBudgetAddress: process.env.AGENTFLOW_DELEGATION_BUDGET_ADDRESS ?? "",
+            uniswapEnabled: isUniswapConfigured()
           },
           null,
           2
@@ -555,8 +795,10 @@ async function startHttpServer(): Promise<void> {
         deadline?: unknown;
         delegator?: unknown;
         delegate?: unknown;
-        delegation?: unknown;
+        delegation?: DelegationRecord;
         subDelegation?: unknown;
+        metamaskPermission?: MetaMaskPermissionRecord;
+        paymentTxHash?: unknown;
         requirements?: unknown;
       };
 
@@ -576,7 +818,8 @@ async function startHttpServer(): Promise<void> {
       const delegator = typeof body.delegator === "string" ? body.delegator : undefined;
       const delegate = typeof body.delegate === "string" ? body.delegate : undefined;
       const delegation = body.delegation;
-      const subDelegation = body.subDelegation;
+      const subDelegation = body.subDelegation as SubDelegationRecord | undefined;
+      const metamaskPermission = body.metamaskPermission as MetaMaskPermissionRecord | undefined;
       const requirements = Array.isArray(body.requirements)
         ? body.requirements
             .filter((item): item is string => typeof item === "string")
@@ -601,7 +844,8 @@ async function startHttpServer(): Promise<void> {
         delegator,
         delegate,
         delegation,
-        subDelegation
+        subDelegation,
+        metamaskPermission
       });
         if (paymentTxHash) {
           task.txHashes = { ...(task.txHashes ?? {}), paymentTx: paymentTxHash };
@@ -814,7 +1058,11 @@ const openApiSpec = {
                 schema: {
                   type: "object",
                   properties: {
-                    orchestratorAddress: { type: "string" }
+                    orchestratorAddress: { type: "string" },
+                    chainId: { type: "number" },
+                    usdcAddress: { type: "string" },
+                    delegationBudgetAddress: { type: "string" },
+                    uniswapEnabled: { type: "boolean" }
                   }
                 }
               }
@@ -844,6 +1092,8 @@ const openApiSpec = {
           delegate: { type: "string" },
           delegation: { type: "object", additionalProperties: true },
           subDelegation: { type: "object", additionalProperties: true },
+          metamaskPermission: { type: "object", additionalProperties: true },
+          paymentTxHash: { type: "string" },
           requirements: { type: "array", items: { type: "string" } }
         }
       },
@@ -872,13 +1122,19 @@ const openApiSpec = {
           deadline: { type: "number" },
           delegation: { type: "object", additionalProperties: true },
           subDelegation: { type: "object", additionalProperties: true },
+          metamaskPermission: { type: "object", additionalProperties: true },
           chainJobId: { type: "number" },
           txHashes: {
             type: "object",
             additionalProperties: { type: "string" }
           },
+          settlement: {
+            type: "object",
+            additionalProperties: true
+          },
           selectedBidId: { type: "string" },
           selectedAgentId: { type: "string" },
+          selectedBidPrice: { type: "number" },
           selectedAgentName: { type: "string" },
           escrowId: { type: "string" },
           txHash: { type: "string" },

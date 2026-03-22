@@ -14,7 +14,8 @@ export class BiddingEngine {
     ).length;
     const coverage = Math.max(1, task.requirements.length);
     const capabilityScore = Math.round((matches / coverage) * 100);
-    const price = Math.max(agent.minPrice, task.reward - capabilityScore / 4);
+    const desiredPrice = Math.max(agent.minPrice, task.reward - capabilityScore / 4);
+    const price = Math.max(1, Math.min(task.reward, desiredPrice));
 
     const bid = {
       id: `bid-${task.id}-${agent.id}`,

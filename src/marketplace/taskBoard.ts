@@ -55,6 +55,7 @@ export class TaskBoard extends EventEmitter {
 
     task.selectedBidId = bid.id;
     task.selectedAgentId = bid.agentId;
+    task.selectedBidPrice = bid.price;
     task.status = "assigned";
     console.log(`[bid:select] task=${taskId} bid=${bidId} agent=${bid.agentId}`);
     this.emit("bidSelected", task, bid);

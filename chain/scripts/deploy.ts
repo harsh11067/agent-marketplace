@@ -15,6 +15,12 @@ async function main() {
   const reputationAddress = await reputation.getAddress();
   console.log("ReputationRegistry:", reputationAddress);
 
+  const DelegationBudget = await ethers.getContractFactory("DelegationBudget");
+  const delegationBudget = await DelegationBudget.deploy();
+  await delegationBudget.waitForDeployment();
+  const delegationBudgetAddress = await delegationBudget.getAddress();
+  console.log("DelegationBudget:", delegationBudgetAddress);
+
   const Marketplace = await ethers.getContractFactory("AgentMarketplace");
   const marketplace = await Marketplace.deploy(usdc, reputationAddress);
   await marketplace.waitForDeployment();
@@ -28,6 +34,7 @@ async function main() {
   console.log(`BASE_SEPOLIA_RPC=${process.env.BASE_SEPOLIA_RPC ?? ""}`);
   console.log(`AGENTFLOW_MARKETPLACE_ADDRESS=${marketplaceAddress}`);
   console.log(`AGENTFLOW_REPUTATION_ADDRESS=${reputationAddress}`);
+  console.log(`AGENTFLOW_DELEGATION_BUDGET_ADDRESS=${delegationBudgetAddress}`);
   console.log(`AGENTFLOW_USDC_ADDRESS=${usdc}`);
 }
 

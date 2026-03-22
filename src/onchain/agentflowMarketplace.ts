@@ -1,18 +1,15 @@
 import { Contract, JsonRpcProvider, Wallet } from "ethers";
+import { delegationBudgetAbi, erc20Abi as sharedErc20Abi } from "../shared/contracts.ts";
+import { deriveAddressFromPrivateKey } from "../shared/wallet.ts";
 
 const marketplaceAbi = [
   "function postJob(string taskURI, uint256 budget, uint256 deadline) returns (uint256 jobId)",
   "function submitBid(uint256 jobId, uint256 price, string metadataURI)",
   "function assignJob(uint256 jobId, address winner, uint256 agreedPrice)",
   "function completeJob(uint256 jobId, string resultURI)",
+  "function jobCount() view returns (uint256)",
   "function getBids(uint256 jobId) view returns (tuple(address agent,uint256 price,string metadataURI,uint256 submittedAt)[])",
   "function jobs(uint256 jobId) view returns (tuple(address poster,string taskURI,uint256 budget,uint256 deadline,address winner,uint256 agreedPrice,uint8 status,string resultURI))"
-] as const;
-
-const erc20Abi = [
-  "function approve(address spender, uint256 amount) returns (bool)",
-  "function allowance(address owner, address spender) view returns (uint256)",
-  "function balanceOf(address owner) view returns (uint256)"
 ] as const;
 
 export type AgentflowOnchainConfig = {
@@ -20,6 +17,8 @@ export type AgentflowOnchainConfig = {
   marketplaceAddress: string;
   usdcAddress: string;
   reputationAddress?: string;
+  delegationBudgetAddress?: string;
+  deployerKey?: string;
   orchestratorKey?: string;
   builderKey?: string;
   designKey?: string;
@@ -43,10 +42,20 @@ export function loadOnchainConfigFromEnv(): Partial<AgentflowOnchainConfig> {
     rpcUrl: process.env.BASE_SEPOLIA_RPC ?? process.env.SEPOLIA_RPC_URL ?? "",
     marketplaceAddress: process.env.AGENTFLOW_MARKETPLACE_ADDRESS ?? "",
     reputationAddress: process.env.AGENTFLOW_REPUTATION_ADDRESS ?? "",
+    delegationBudgetAddress: process.env.AGENTFLOW_DELEGATION_BUDGET_ADDRESS ?? "",
     usdcAddress: process.env.AGENTFLOW_USDC_ADDRESS ?? process.env.USDC_ADDRESS ?? "",
+    deployerKey: process.env.DEPLOYER_KEY ?? "",
     orchestratorKey: process.env.AGENT_OWNER_KEY ?? "",
     builderKey: process.env.AGENT_BUILDER_KEY ?? "",
     designKey: process.env.AGENT_DESIGN_KEY ?? ""
+  };
+}
+
+export function deriveManagedAddresses(config: Partial<AgentflowOnchainConfig>) {
+  return {
+    orchestratorAddress: deriveAddressFromPrivateKey(config.orchestratorKey),
+    builderAddress: deriveAddressFromPrivateKey(config.builderKey),
+    designAddress: deriveAddressFromPrivateKey(config.designKey)
   };
 }
 
@@ -62,7 +71,7 @@ export async function approveUsdcIfNeeded(params: {
   if (!wallet) {
     throw new Error("missing ownerKey");
   }
-  const token = new Contract(params.usdcAddress, erc20Abi, wallet);
+  const token = new Contract(params.usdcAddress, sharedErc20Abi, wallet);
   const current: bigint = await token.allowance(wallet.address, params.spender);
   if (current >= params.minAmount) {
     return { approved: false, allowance: current };
@@ -71,6 +80,98 @@ export async function approveUsdcIfNeeded(params: {
   await tx.wait();
   const next: bigint = await token.allowance(wallet.address, params.spender);
   return { approved: true, txHash: tx.hash, allowance: next };
+}
+
+export async function getUsdcBalance(params: {
+  rpcUrl: string;
+  usdcAddress: string;
+  address: string;
+}): Promise<bigint> {
+  const provider = getProvider(params.rpcUrl);
+  const token = new Contract(params.usdcAddress, sharedErc20Abi, provider);
+  return (await token.balanceOf(params.address)) as bigint;
+}
+
+export async function transferUsdc(params: {
+  rpcUrl: string;
+  usdcAddress: string;
+  fromKey: string;
+  to: string;
+  amount: bigint;
+}): Promise<{ txHash: string }> {
+  const provider = getProvider(params.rpcUrl);
+  const wallet = getWallet(params.fromKey, provider);
+  if (!wallet) {
+    throw new Error("missing fromKey");
+  }
+  const token = new Contract(
+    params.usdcAddress,
+    [...sharedErc20Abi, "function transfer(address to, uint256 amount) returns (bool)"] as const,
+    wallet
+  );
+  const tx = await token.transfer(params.to, params.amount);
+  await tx.wait();
+  return { txHash: tx.hash };
+}
+
+export async function registerDelegationOnchain(params: {
+  rpcUrl: string;
+  delegationBudgetAddress: string;
+  actorKey: string;
+  delegationHash: string;
+  delegator: string;
+  delegate: string;
+  cap: bigint;
+  deadlineUnix: number;
+}): Promise<{ txHash: string }> {
+  const provider = getProvider(params.rpcUrl);
+  const wallet = getWallet(params.actorKey, provider);
+  if (!wallet) {
+    throw new Error("missing actorKey");
+  }
+  const budget = new Contract(params.delegationBudgetAddress, delegationBudgetAbi, wallet);
+  const tx = await budget.registerDelegation(
+    params.delegationHash,
+    params.delegator,
+    params.delegate,
+    params.cap,
+    BigInt(params.deadlineUnix)
+  );
+  await tx.wait();
+  return { txHash: tx.hash };
+}
+
+export async function recordDelegationSpendOnchain(params: {
+  rpcUrl: string;
+  delegationBudgetAddress: string;
+  delegateKey: string;
+  delegationHash: string;
+  amount: bigint;
+}): Promise<{ txHash: string }> {
+  const provider = getProvider(params.rpcUrl);
+  const wallet = getWallet(params.delegateKey, provider);
+  if (!wallet) {
+    throw new Error("missing delegateKey");
+  }
+  const budget = new Contract(params.delegationBudgetAddress, delegationBudgetAbi, wallet);
+  let lastError: unknown;
+
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    try {
+      const tx = await budget.recordSpend(params.delegationHash, params.amount);
+      await tx.wait();
+      return { txHash: tx.hash };
+    } catch (error) {
+      lastError = error;
+      const message = error instanceof Error ? error.message : String(error);
+      if (!message.includes("Delegation inactive") || attempt === 2) {
+        throw error;
+      }
+      await new Promise((resolve) => setTimeout(resolve, 1_000));
+    }
+  }
+
+  throw lastError instanceof Error ? lastError : new Error(String(lastError));
 }
 
 export async function postJobOnchain(params: {
@@ -107,6 +208,14 @@ export async function postJobOnchain(params: {
     jobId = event?.args?.jobId ? Number(event.args.jobId) : 0;
   } catch {
     jobId = 0;
+  }
+
+  if (!jobId) {
+    try {
+      jobId = Number(await marketplace.jobCount());
+    } catch {
+      jobId = 0;
+    }
   }
 
   return { jobId, txHash: tx.hash };

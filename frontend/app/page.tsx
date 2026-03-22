@@ -1,16 +1,7 @@
 'use client'
 
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import { useState, Suspense } from 'react'
 import { ArrowRight, Zap, Shield, TrendingUp, Bot, ChevronRight } from 'lucide-react'
-
-// Dynamically import Spline to avoid SSR issues
-const Spline = dynamic(
-  () =>
-    import('@splinetool/react-spline').then((mod) => mod.default),
-  { ssr: false }
-)
 
 const FEATURES = [
   {
@@ -48,25 +39,13 @@ const STEPS = [
 ]
 
 export default function LandingPage() {
-  const [splineLoaded, setSplineLoaded] = useState(false)
-
   return (
     <div className="min-h-screen bg-[#0A0F1E]">
-      {/* ---- SPLINE HERO ---- */}
+      {/* ---- HERO ---- */}
       <section className="relative h-screen overflow-hidden">
-        {/* Spline 3D Background */}
         <div className="absolute inset-0">
-          <Suspense fallback={
-            <div className="w-full h-full bg-gradient-to-br from-[#0A0F1E] via-indigo-950/30 to-[#0A0F1E]">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_50%,rgba(99,102,241,0.15),transparent)]" />
-            </div>
-          }>
-            <Spline
-              scene="https://prod.spline.design/0e9b7e1f-54db-4797-9594-6f3c68d85804/scene.splinecode"
-              onLoad={() => setSplineLoaded(true)}
-              style={{ width: '100%', height: '100%' }}
-            />
-          </Suspense>
+          <div className="w-full h-full bg-[radial-gradient(ellipse_80%_60%_at_50%_20%,rgba(99,102,241,0.22),transparent_55%),radial-gradient(ellipse_70%_45%_at_50%_60%,rgba(59,130,246,0.12),transparent_60%),linear-gradient(180deg,#0A0F1E_0%,#0A0F1E_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(180deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:72px_72px] opacity-30" />
         </div>
 
         {/* Dark overlay for readability */}

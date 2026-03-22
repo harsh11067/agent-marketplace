@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useCallback, useRef } from 'react'
 import Link from 'next/link'
+import { createDelegationPayload } from '../lib/delegation'
+import { detectExecutionPermissionSupport, requestExecutionPermission } from '../lib/metamaskPermissions'
 import {
   Zap, ArrowLeft, Send, Bot, CheckCircle2,
   Clock, Loader2, Award, Shield, Link2, ExternalLink,
@@ -27,13 +29,31 @@ interface Task {
   createdAt?: number
   delegator?: string
   delegate?: string
-  delegation?: Record<string, unknown>
-  subDelegation?: {
-    parent?: Record<string, unknown>
+  delegation?: {
+    kind?: string
+    chainId?: number
     delegator?: string
     delegate?: string
-    capUsdc?: number
+    token?: string
+    capAmount?: string
+    nonce?: string
+    deadline?: number
+    digest?: string
+    signature?: string
+  }
+  subDelegation?: {
+    delegator?: string
+    delegate?: string
+    capAmount?: string
+    parentDigest?: string
     createdAt?: number
+  } | null
+  metamaskPermission?: {
+    context?: string
+    signerMeta?: {
+      userOpBuilder?: string
+      delegationManager?: string
+    }
   } | null
   chainJobId?: number
   txHashes?: Record<string, string>
@@ -102,6 +122,18 @@ function timeAgo(ts?: number) {
   if (diff < 60) return `${Math.floor(diff)}s ago`
   if (diff < 3600) return `${Math.floor(diff / 60)}m ago`
   return `${Math.floor(diff / 3600)}h ago`
+}
+
+function getRpcErrorMessage(error: unknown): string {
+  if (error instanceof Error && error.message) return error.message
+  if (error && typeof error === 'object' && 'message' in error && typeof (error as any).message === 'string') {
+    return (error as any).message
+  }
+  return String(error)
+}
+
+function isCompatibilityFallbackMessage(message: string): boolean {
+  return /permission type .* not enabled|wallet_getSupportedExecutionPermissions|wallet_requestExecutionPermissions|invalid params|not supported/i.test(message)
 }
 
 // ---- SUBCOMPONENTS ----
@@ -312,7 +344,7 @@ function TaskCard({ task, expanded, onToggle }: {
                   </div>
                 </div>
                 <div className="delegation-arrow text-xs text-indigo-400">
-                  ↓ delegated ${task.subDelegation.capUsdc || task.reward} USDC cap
+                  ↓ delegated ${task.subDelegation.capAmount ? Number(task.subDelegation.capAmount) / 1_000_000 : task.reward} USDC cap
                 </div>
                 <div className="delegation-node">
                   <div className="flex items-center gap-2">
@@ -405,6 +437,10 @@ export default function DashboardPage() {
   const [tab, setTab] = useState<TabType>('submit')
   const [walletAddress, setWalletAddress] = useState<string | null>(null)
   const [orchestratorAddress, setOrchestratorAddress] = useState<string>('')
+  const [chainId, setChainId] = useState<number>(84532)
+  const [usdcAddress, setUsdcAddress] = useState<string>('')
+  const [delegationBudgetAddress, setDelegationBudgetAddress] = useState<string>('')
+  const [uniswapEnabled, setUniswapEnabled] = useState<boolean>(false)
   const [tasks, setTasks] = useState<Task[]>([])
   const [agents, setAgents] = useState<Agent[]>([])
   const [backendError, setBackendError] = useState<string>('')
@@ -422,11 +458,19 @@ export default function DashboardPage() {
   useEffect(() => {
     fetch('/api/backend/bootstrap')
       .then(r => r.json())
-      .then(d => setOrchestratorAddress(d.orchestratorAddress || ''))
-      .catch(() => setOrchestratorAddress(
-        // Fallback to env value from plan
-        process.env.NEXT_PUBLIC_AGENT_OWNER_WALLET || '0x890437459ECc4C844f28DeE85361734F2f054407'
-      ))
+      .then(d => {
+        setOrchestratorAddress(d.orchestratorAddress || '')
+        setChainId(Number(d.chainId || 84532))
+        setUsdcAddress(d.usdcAddress || '')
+        setDelegationBudgetAddress(d.delegationBudgetAddress || '')
+        setUniswapEnabled(Boolean(d.uniswapEnabled))
+      })
+      .catch(() => {
+        setOrchestratorAddress(
+          process.env.NEXT_PUBLIC_AGENT_OWNER_WALLET || '0x890437459ECc4C844f28DeE85361734F2f054407'
+        )
+        setChainId(84532)
+      })
 
     // Try to get already connected wallet
     if (typeof window !== 'undefined' && (window as any).ethereum) {
@@ -474,7 +518,6 @@ export default function DashboardPage() {
     const reward = parseFloat(budget)
     if (!reward || reward <= 0) { setSubmitError('Valid budget required.'); return }
 
-    // Need wallet
     if (!walletAddress) {
       setSubmitError('Please connect MetaMask first.')
       return
@@ -482,40 +525,87 @@ export default function DashboardPage() {
 
     const delegate = orchestratorAddress
     if (!delegate) {
-      setSubmitError('Orchestrator address missing. Starting demo mode.')
-      // In demo (no AGENT_OWNER_WALLET env), use the known address
+      setSubmitError('Orchestrator address missing.')
+      return
+    }
+
+    if (!usdcAddress) {
+      setSubmitError('USDC address missing from bootstrap config.')
+      return
     }
 
     setSubmitting(true)
-    setSubmitMsg('Connecting MetaMask…')
+    setSubmitMsg('Preparing ERC-7715 delegation...')
     setTab('tasks')
 
     try {
-      // Send real ETH transaction
       const deadlineSec = Math.floor(Date.now() / 1000) + Math.floor(parseFloat(deadlineMinutes || '60') * 60)
-      let paymentTxHash = ''
+      const capAmount = BigInt(Math.max(1, Math.floor(reward * 1_000_000)))
+      const ethereum = (window as any).ethereum
+      let compatibilityReason = ''
+      let metamaskPermission: Awaited<ReturnType<typeof requestExecutionPermission>> = null
 
-      if (delegate && (window as any).ethereum) {
+      const permissionSupport = await detectExecutionPermissionSupport({
+        ethereum,
+        chainId,
+        permissionType: 'erc20-token-periodic',
+      })
+
+      if (!permissionSupport.supported) {
+        compatibilityReason = permissionSupport.reason || 'wallet does not support ERC-20 execution permissions'
+      } else {
         try {
-          setSubmitMsg('Please confirm the Sepolia ETH payment in MetaMask...')
-          // Simulate USDC with a small amount of ETH (0.0001 ETH per budget unit to conserve testnet funds)
-          const valueWei = BigInt(Math.floor(reward * 1e14)).toString(16)
-          
-          const txHash = await (window as any).ethereum.request({
-            method: 'eth_sendTransaction',
-            params: [{
-              from: walletAddress,
-              to: delegate,
-              value: '0x' + valueWei,
-            }],
+          setSubmitMsg('Requesting MetaMask execution permission...')
+          metamaskPermission = await requestExecutionPermission({
+            ethereum,
+            chainId,
+            orchestratorAddress: delegate,
+            tokenAddress: usdcAddress,
+            periodAmount: capAmount,
+            deadlineUnix: deadlineSec,
           })
-          paymentTxHash = txHash
-          setSubmitMsg(`Payment sent! (Tx: ${txHash.slice(0, 10)}...) Posting task…`)
-        } catch (e) {
-          setSubmitError('Payment cancelled or failed. Cannot post task.')
-          setSubmitMsg('')
-          setSubmitting(false)
-          return
+        } catch (error) {
+          const message = getRpcErrorMessage(error)
+          if (isCompatibilityFallbackMessage(message)) {
+            compatibilityReason = message
+            metamaskPermission = null
+          } else {
+            throw error
+          }
+        }
+      }
+
+      const { payload: delegationPayload, record: delegationRecord } = createDelegationPayload({
+        chainId,
+        delegator: walletAddress,
+        delegate,
+        token: usdcAddress,
+        capAmount: String(capAmount),
+        deadline: deadlineSec,
+        nonceSeed: `${walletAddress}-${Date.now()}`,
+      })
+
+      let signature: string | undefined
+      if (metamaskPermission) {
+        setSubmitMsg('MetaMask execution permission granted. Posting task...')
+      } else if (compatibilityReason) {
+        setSubmitMsg('Wallet compatibility mode active. Posting task without MetaMask execution permission...')
+      } else {
+        try {
+          setSubmitMsg('Confirm the MetaMask delegation signature...')
+          signature = await ethereum.request({
+            method: 'eth_signTypedData_v4',
+            params: [walletAddress, JSON.stringify(delegationPayload)],
+          })
+          setSubmitMsg('Delegation signed. Posting task...')
+        } catch (error) {
+          const message = getRpcErrorMessage(error)
+          const allowPermissionOnly =
+            /internal accounts|cannot sign delegations|external signature requests/i.test(message)
+          if (!allowPermissionOnly) {
+            throw error
+          }
+          setSubmitMsg('Posting task without extra typed signature...')
         }
       }
 
@@ -527,13 +617,23 @@ export default function DashboardPage() {
           reward,
           deadline: deadlineSec,
           delegator: walletAddress,
-          delegate: delegate || walletAddress,
-          paymentTxHash,
+          delegate,
+          delegation: {
+            ...delegationRecord,
+            signature,
+            signedAt: Date.now(),
+          },
+          metamaskPermission,
         }),
       })
       const payload = await res.json()
       if (res.ok) {
-        setSubmitMsg(`✓ Task accepted (${payload.taskId || 'queued'})`)
+        const successLabel = metamaskPermission
+          ? 'Execution permission granted'
+          : signature
+            ? 'Delegation signed'
+            : 'Task accepted in wallet compatibility mode'
+        setSubmitMsg(`${successLabel} (${payload.taskId || 'queued'})`)
         setDescription('')
         setBudget('5')
         await fetchData()
@@ -541,8 +641,9 @@ export default function DashboardPage() {
         setSubmitError(payload.error || 'Submission failed.')
         setSubmitMsg('')
       }
-    } catch (err) {
-      setSubmitError('Network error - is the backend running on port 3002?')
+    } catch (error) {
+      const message = getRpcErrorMessage(error)
+      setSubmitError(message)
       setSubmitMsg('')
     } finally {
       setSubmitting(false)
@@ -752,6 +853,9 @@ export default function DashboardPage() {
                 </div>
                 <p className="text-xs text-white/30 mt-2">
                   This is the MetaMask delegation target — the orchestrator agent's wallet.
+                </p>
+                <p className="text-xs text-white/30 mt-1">
+                  Delegation budget: {delegationBudgetAddress ? formatAddress(delegationBudgetAddress) : 'not configured'} · Uniswap: {uniswapEnabled ? 'enabled' : 'disabled'}
                 </p>
               </div>
             </div>

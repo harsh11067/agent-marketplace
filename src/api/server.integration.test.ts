@@ -1,12 +1,13 @@
 import assert from "node:assert/strict";
 import { spawn, type ChildProcessWithoutNullStreams } from "node:child_process";
+import { resolve } from "node:path";
 import { describe, it, before, after } from "node:test";
 import { setTimeout as delay } from "node:timers/promises";
 
 const HOST = "127.0.0.1";
 const PORT = 3102;
 const BASE_URL = `http://${HOST}:${PORT}`;
-const ROOT = "/home/hash/my-aproject";
+const ROOT = resolve(process.cwd());
 
 let serverProc: ChildProcessWithoutNullStreams | undefined;
 
@@ -49,7 +50,7 @@ async function waitForTaskTerminal(taskId: string, timeoutMs = 25_000): Promise<
 describe("API Integration", () => {
   before(async () => {
     serverProc = spawn(
-      "node",
+      process.execPath,
       ["--experimental-strip-types", "src/api/server.ts", "serve"],
       {
         cwd: ROOT,

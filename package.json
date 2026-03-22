@@ -1,5 +1,5 @@
 {
-  "name": "my-aproject",
+  "name": "agent-marketplace",
   "version": "1.0.0",
   "description": "Minimal autonomous AI agent marketplace framework for the Synthesis hackathon",
   "main": "src/api/server.ts",
@@ -11,20 +11,30 @@
     "orchestrator:run": "node --env-file=.env --experimental-strip-types src/agent/runOrchestrator.ts",
     "orchestrator:test": "node --test --experimental-strip-types src/agent/orchestratorAgent.test.ts",
     "backend:test": "node --test --experimental-strip-types src/api/server.integration.test.ts src/blockchain/paymentManager.test.ts",
+    "seed:jobs": "node --env-file=.env --experimental-strip-types scripts/seedJobs.ts",
+    "seed:uniswap-liquidity": "node --env-file=.env --experimental-strip-types scripts/seedUniswapLiquidity.ts",
+    "fund:agents": "node --env-file=.env --experimental-strip-types scripts/fundAgents.ts",
+    "init:managed-agents": "node --env-file=.env --experimental-strip-types scripts/initManagedAgents.ts",
+    "chain:test": "npm test --prefix chain",
+    "chain:deploy": "npm run deploy:baseSepolia --prefix chain",
     "start": "npx concurrently --kill-others \"npm run backend:dev\" \"npm run frontend:dev\"",
     "frontend:dev": "cd frontend && npm run dev",
     "frontend:install": "cd frontend && npm install",
-    "hardhat:install": "cd my-aproject && npm install",
-    "install:all": "npm install && npm run frontend:install && npm run hardhat:install"
+    "chain:install": "cd chain && npm install",
+    "install:all": "npm install && npm run frontend:install && npm run chain:install"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "dependencies": {
-    "@splinetool/react-spline": "^2.2.6",
+    "@metamask/delegation-toolkit": "^0.13.0",
     "ethers": "^6.16.0",
     "express": "^5.2.1",
-    "hardhat": "^3.1.12"
+    "hardhat": "^3.1.12",
+    "viem": "^2.47.6"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

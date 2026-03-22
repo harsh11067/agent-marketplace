@@ -94,6 +94,7 @@ export class AgentLoop {
         | "deadline"
         | "delegation"
         | "subDelegation"
+        | "metamaskPermission"
         | "chainJobId"
         | "txHashes"
       >
@@ -117,6 +118,7 @@ export class AgentLoop {
       deadline: overrides?.deadline,
       delegation: overrides?.delegation,
       subDelegation: overrides?.subDelegation,
+      metamaskPermission: overrides?.metamaskPermission,
       chainJobId: overrides?.chainJobId,
       txHashes: overrides?.txHashes
     };
